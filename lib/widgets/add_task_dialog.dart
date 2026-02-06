@@ -33,27 +33,29 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
           color: AppColors.black,
         ),
       ),
-      content: TextField(
-        controller: _controller,
-        autofocus: true,
-        style: const TextStyle(
-          fontSize: 17,
-          color: AppColors.black,
-        ),
-        decoration: InputDecoration(
-          hintText: AppLocalizations.of(context)!.taskName,
-          hintStyle: const TextStyle(
-            color: AppColors.gray,
+      content: SingleChildScrollView(
+        child: TextField(
+          controller: _controller,
+          autofocus: true,
+          style: const TextStyle(
+            fontSize: 17,
+            color: AppColors.black,
           ),
-          filled: true,
-          fillColor: AppColors.background,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide.none,
+          decoration: InputDecoration(
+            hintText: AppLocalizations.of(context)!.taskName,
+            hintStyle: const TextStyle(
+              color: AppColors.gray,
+            ),
+            filled: true,
+            fillColor: AppColors.background,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide.none,
+            ),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           ),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          onSubmitted: (_) => _saveTask(context),
         ),
-        onSubmitted: (_) => _saveTask(context),
       ),
       actions: [
         TextButton(

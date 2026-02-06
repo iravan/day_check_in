@@ -399,10 +399,10 @@ class _HomePageState extends State<HomePage> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.appTitle),
         backgroundColor: theme.appBarTheme.backgroundColor,
         foregroundColor: theme.appBarTheme.foregroundColor,
         elevation: 0,
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
             icon: Icon(
@@ -445,7 +445,7 @@ class _HomePageState extends State<HomePage> {
                   DebugDateControls(
                     onDateChanged: _onDateSimulated,
                   ),
-                  Expanded(
+                  Flexible(
                     flex: 2,
                     child: SingleChildScrollView(
                       child: CalendarWidget(
@@ -455,11 +455,11 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                Container(
-                  height: 0.5,
-                  color: theme.dividerTheme.color,
-                ),
-                  Expanded(
+                  Container(
+                    height: 0.5,
+                    color: theme.dividerTheme.color,
+                  ),
+                  Flexible(
                     flex: 3,
                     child: TaskListWidget(
                       tasks: _tasks,

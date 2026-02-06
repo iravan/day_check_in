@@ -225,7 +225,8 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                 itemCount: widget.tasks.length,
                 itemBuilder: (context, index) {
                   final task = widget.tasks[index];
-                  return Center(
+                  return Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
                     child: _buildTaskCard(task, index),
                   );
                 },
@@ -240,8 +241,9 @@ class _TaskListWidgetState extends State<TaskListWidget> {
     return GestureDetector(
       onTap: () => widget.onTaskToggle(task),
       child: Container(
-        margin: const EdgeInsets.all(16),
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+        width: double.infinity,
+        height: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(20),
@@ -253,96 +255,106 @@ class _TaskListWidgetState extends State<TaskListWidget> {
             ),
           ],
         ),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Circle indicator
-              GestureDetector(
-                onTap: () => widget.onTaskToggle(task),
-                child: Container(
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: task.isCompleted
-                        ? Theme.of(context).colorScheme.primary
-                        : Colors.transparent,
-                    border: Border.all(
-                      color: task.isCompleted
-                          ? Theme.of(context).colorScheme.primary
-                          : AppColors.gray,
-                      width: task.isCompleted ? 0 : 3,
-                    ),
-                  ),
-                  child: task.isCompleted
-                      ? const Icon(
-                          Icons.check,
-                          color: AppColors.white,
-                          size: 40,
-                        )
-                      : Container(
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                          ),
-                          child: CustomPaint(painter: _CircleLinesPainter()),
-                        ),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: constraints.maxHeight,
                 ),
-              ),
-              const SizedBox(height: 20),
-              // Task title
-              Text(
-                task.title,
-                textAlign: TextAlign.center,
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w600,
-                  color: task.isCompleted ? AppColors.gray : AppColors.black,
-                  decoration: task.isCompleted
-                      ? TextDecoration.lineThrough
-                      : TextDecoration.none,
-                  decorationThickness: 2,
-                  decorationColor: AppColors.gray,
-                ),
-              ),
-              const SizedBox(height: 6),
-              // Task status
-              Text(
-                task.isCompleted
-                    ? AppLocalizations.of(context)!.completed
-                    : AppLocalizations.of(context)!.incomplete,
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w400,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+            // Circle indicator
+            GestureDetector(
+              onTap: () => widget.onTaskToggle(task),
+              child: Container(
+                width: 80,
+                height: 80,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
                   color: task.isCompleted
                       ? Theme.of(context).colorScheme.primary
-                      : AppColors.gray,
+                      : Colors.transparent,
+                  border: Border.all(
+                    color: task.isCompleted
+                        ? Theme.of(context).colorScheme.primary
+                        : AppColors.gray,
+                    width: task.isCompleted ? 0 : 3,
+                  ),
                 ),
+                child: task.isCompleted
+                    ? const Icon(
+                        Icons.check,
+                        color: AppColors.white,
+                        size: 40,
+                      )
+                    : Container(
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                        ),
+                        child: CustomPaint(painter: _CircleLinesPainter()),
+                      ),
               ),
-              const SizedBox(height: 12),
-              // Page indicator
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  widget.tasks.length,
-                  (i) => Container(
-                    width: 6,
-                    height: 6,
-                    margin: const EdgeInsets.symmetric(horizontal: 3),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: i == index
-                          ? Theme.of(context).colorScheme.primary
-                          : AppColors.lightGray,
-                    ),
+            ),
+            const SizedBox(height: 20),
+            // Task title
+            Text(
+              task.title,
+              textAlign: TextAlign.center,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w600,
+                color: task.isCompleted ? AppColors.gray : AppColors.black,
+                decoration: task.isCompleted
+                    ? TextDecoration.lineThrough
+                    : TextDecoration.none,
+                decorationThickness: 2,
+                decorationColor: AppColors.gray,
+              ),
+            ),
+            const SizedBox(height: 6),
+            // Task status
+            Text(
+              task.isCompleted
+                  ? AppLocalizations.of(context)!.completed
+                  : AppLocalizations.of(context)!.incomplete,
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w400,
+                color: task.isCompleted
+                    ? Theme.of(context).colorScheme.primary
+                    : AppColors.gray,
+              ),
+            ),
+            const SizedBox(height: 12),
+            // Page indicator
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                widget.tasks.length,
+                (i) => Container(
+                  width: 6,
+                  height: 6,
+                  margin: const EdgeInsets.symmetric(horizontal: 3),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: i == index
+                        ? Theme.of(context).colorScheme.primary
+                        : AppColors.lightGray,
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+                  ],
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

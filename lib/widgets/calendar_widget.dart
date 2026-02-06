@@ -127,8 +127,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                         decoration: BoxDecoration(
                           color: isCompleted
                               ? Theme.of(context).colorScheme.primary
-                              : isToday
-                              ? Theme.of(context).colorScheme.primary
                               : Colors.transparent,
                           shape: BoxShape.circle,
                         ),
@@ -145,8 +143,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                                       : FontWeight.w400,
                                   color: isCompleted
                                       ? AppColors.white
-                                      : isToday
-                                      ? AppColors.white
                                       : isFuture
                                       ? AppColors.lightGray
                                       : isSelected
@@ -154,14 +150,16 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                                       : AppColors.black,
                                 ),
                               ),
-                              if (isCompleted && !isToday)
+                              if (isToday)
                                 const SizedBox(height: 2),
-                              if (isCompleted && !isToday)
+                              if (isToday)
                                 Container(
                                   width: 4,
                                   height: 4,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
+                                  decoration: BoxDecoration(
+                                    color: isCompleted
+                                        ? AppColors.white
+                                        : Theme.of(context).colorScheme.primary,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
