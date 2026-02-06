@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
+import '../constants/app_colors.dart';
 
 class AddTaskDialog extends StatefulWidget {
   const AddTaskDialog({super.key});
@@ -19,46 +21,61 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: AppColors.white,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(14),
       ),
-      title: Row(
-        children: [
-          Icon(
-            Icons.add_task,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-          const SizedBox(width: 12),
-          const Text(
-            'Add New Task',
-            style: TextStyle(fontWeight: FontWeight.w600),
-          ),
-        ],
+      title: Text(
+        AppLocalizations.of(context)!.newTask,
+        style: TextStyle(
+          fontSize: 17,
+          fontWeight: FontWeight.w600,
+          color: AppColors.black,
+        ),
       ),
       content: TextField(
         controller: _controller,
         autofocus: true,
+        style: const TextStyle(
+          fontSize: 17,
+          color: AppColors.black,
+        ),
         decoration: InputDecoration(
-          hintText: 'Enter task title',
-          prefixIcon: const Icon(Icons.task_alt),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
+          hintText: AppLocalizations.of(context)!.taskName,
+          hintStyle: const TextStyle(
+            color: AppColors.gray,
           ),
+          filled: true,
+          fillColor: AppColors.background,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide.none,
+          ),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         ),
         onSubmitted: (_) => _saveTask(context),
       ),
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: const Text('Cancel'),
-        ),
-        ElevatedButton(
-          onPressed: () => _saveTask(context),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            foregroundColor: Colors.white,
+          child: Text(
+            AppLocalizations.of(context)!.cancel,
+            style: TextStyle(
+              fontSize: 17,
+              color: AppColors.blue,
+            ),
           ),
-          child: const Text('Add'),
+        ),
+        TextButton(
+          onPressed: () => _saveTask(context),
+          child: Text(
+            AppLocalizations.of(context)!.add,
+            style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.w600,
+              color: AppColors.blue,
+            ),
+          ),
         ),
       ],
     );

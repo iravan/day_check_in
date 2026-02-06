@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import '../services/storage_service.dart';
+import '../constants/app_colors.dart';
 
 class HistoryDialog extends StatefulWidget {
   const HistoryDialog({super.key});
@@ -51,144 +53,159 @@ class _HistoryDialogState extends State<HistoryDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      backgroundColor: AppColors.white,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(14),
       ),
       child: Container(
         width: MediaQuery.of(context).size.width * 0.9,
         height: MediaQuery.of(context).size.height * 0.7,
-        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Icon(
-                  Icons.history,
-                  color: Theme.of(context).colorScheme.primary,
-                  size: 28,
-                ),
-                const SizedBox(width: 12),
-                const Text(
-                  'History',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
+            // iOS style header
+            Container(
+              padding: const EdgeInsets.fromLTRB(20, 16, 16, 8),
+              child: Row(
+                children: [
+                  Text(
+                    AppLocalizations.of(context)!.history,
+                    style: TextStyle(
+                      fontSize: 34,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.black,
+                      letterSpacing: 0.37,
+                    ),
                   ),
-                ),
-                const Spacer(),
-                IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: () => Navigator.of(context).pop(),
-                  style: IconButton.styleFrom(
-                    backgroundColor: Colors.grey.shade100,
+                  const Spacer(),
+                  IconButton(
+                    icon: const Icon(Icons.close, color: AppColors.blue),
+                    onPressed: () => Navigator.of(context).pop(),
+                    padding: EdgeInsets.zero,
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-            const SizedBox(height: 8),
-            Divider(
-              thickness: 1,
-              color: Colors.grey.shade200,
-            ),
+            const Divider(height: 1, color: AppColors.divider),
             if (_isLoading)
               const Expanded(
                 child: Center(child: CircularProgressIndicator()),
               )
             else if (_monthHistory.isEmpty)
-              const Expanded(
+              Expanded(
                 child: Center(
-                  child: Text(
-                    'No completed days yet.\nComplete all tasks for a day to see it here!',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey,
-                    ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.calendar_today_outlined,
+                        size: 48,
+                        color: AppColors.lightGray,
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        AppLocalizations.of(context)!.noHistory,
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.gray,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               )
             else
               Expanded(
-                child: ListView.builder(
-                  itemCount: _monthHistory.length,
-                  itemBuilder: (context, index) {
-                    final monthKey = _monthHistory.keys.elementAt(index);
-                    final days = _monthHistory[monthKey]!;
-                    final monthName = _getMonthName(monthKey);
+                child: Container(
+                  color: AppColors.background,
+                  child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    itemCount: _monthHistory.length,
+                    itemBuilder: (context, index) {
+                      final monthKey = _monthHistory.keys.elementAt(index);
+                      final days = _monthHistory[monthKey]!;
+                      final monthName = _getMonthName(monthKey);
 
-                    return Card(
-                      margin: const EdgeInsets.symmetric(vertical: 4),
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        side: BorderSide(color: Colors.grey.shade200),
-                      ),
-                      child: ExpansionTile(
-                        leading: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: Colors.green.shade50,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Icon(
-                            Icons.calendar_month,
-                            color: Colors.green.shade600,
-                            size: 20,
-                          ),
-                        ),
-                        title: Text(
-                          monthName,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
-                        ),
-                        subtitle: Padding(
-                          padding: const EdgeInsets.only(top: 4),
-                          child: Text(
-                            '${days.length} completed ${days.length == 1 ? 'day' : 'days'}',
-                            style: TextStyle(
-                              color: Colors.grey.shade600,
-                              fontSize: 13,
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 8),
+                        color: Colors.white,
+                        child: ExpansionTile(
+                          tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                          leading: Container(
+                            width: 32,
+                            height: 32,
+                            decoration: const BoxDecoration(
+                              color: AppColors.green,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(
+                              Icons.check,
+                              size: 18,
+                              color: Colors.white,
                             ),
                           ),
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Wrap(
+                          title: Text(
+                            monthName,
+                            style: const TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.black,
+                            ),
+                          ),
+                          subtitle: Text(
+                            AppLocalizations.of(context)!.monthHistoryDays(days.length),
+                            style: const TextStyle(
+                              fontSize: 15,
+                              color: AppColors.gray,
+                            ),
+                          ),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                              bottom: Radius.circular(0),
+                            ),
+                          ),
+                          children: [
+                            Wrap(
                               spacing: 8,
                               runSpacing: 8,
                               children: days.map((day) {
                                 final parts = day.split('-');
                                 final dayNumber = parts[2];
-                                return Chip(
-                                  avatar: Icon(
-                                    Icons.check_circle,
-                                    size: 18,
-                                    color: Colors.green.shade600,
+                                return Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.green.withOpacity(0.1),
+                                    borderRadius: BorderRadius.circular(8),
                                   ),
-                                  label: Text(
-                                    'Day $dayNumber',
-                                    style: const TextStyle(fontWeight: FontWeight.w500),
-                                  ),
-                                  backgroundColor: Colors.green.shade50,
-                                  side: BorderSide(color: Colors.green.shade200),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Icon(
+                                        Icons.check_circle,
+                                        size: 16,
+                                        color: AppColors.green,
+                                      ),
+                                      const SizedBox(width: 6),
+                                      Text(
+                                        AppLocalizations.of(context)!.dayNumber(dayNumber),
+                                        style: const TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400,
+                                          color: AppColors.black,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 );
                               }).toList(),
                             ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
           ],

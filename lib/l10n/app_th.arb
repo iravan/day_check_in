@@ -1,0 +1,189 @@
+{
+  "@@locale": "th",
+  "appTitle": "เช็คอินรายวัน",
+  "@appTitle": {
+    "description": "ชื่อแอปพลิเคชัน"
+  },
+  "today": "วันนี้",
+  "@today": {
+    "description": "ป้ายกำกับวันนี้"
+  },
+  "yesterday": "เมื่อวาน",
+  "@yesterday": {
+    "description": "ป้ายกำกับเมื่อวาน"
+  },
+  "tasks": "งาน",
+  "@tasks": {
+    "description": "ป้ายกำกับส่วนงาน"
+  },
+  "noTasks": "ไม่มีงาน",
+  "@noTasks": {
+    "description": "ข้อความเมื่อไม่มีงาน"
+  },
+  "tapToAddTask": "แตะ + เพื่อเพิ่มงาน",
+  "@tapToAddTask": {
+    "description": "คำแนะนำในการเพิ่มงาน"
+  },
+  "addTasksOnToday": "เพิ่มงานในวันนี้",
+  "@addTasksOnToday": {
+    "description": "คำแนะนำในการเพิ่มงานในวันนี้"
+  },
+  "newTask": "งานใหม่",
+  "@newTask": {
+    "description": "หัวข้อกล่องโต้ตอบงานใหม่"
+  },
+  "editTask": "แก้ไขงาน",
+  "@editTask": {
+    "description": "หัวข้อกล่องโต้ตอบแก้ไขงาน"
+  },
+  "taskName": "ชื่องาน",
+  "@taskName": {
+    "description": "ตัวยึดตำแหน่งสำหรับการป้อนชื่องาน"
+  },
+  "cancel": "ยกเลิก",
+  "@cancel": {
+    "description": "ปุ่มยกเลิก"
+  },
+  "add": "เพิ่ม",
+  "@add": {
+    "description": "ปุ่มเพิ่ม"
+  },
+  "save": "บันทึก",
+  "@save": {
+    "description": "ปุ่มบันทึก"
+  },
+  "edit": "แก้ไข",
+  "@edit": {
+    "description": "การดำเนินการแก้ไข"
+  },
+  "delete": "ลบ",
+  "@delete": {
+    "description": "การดำเนินการลบ"
+  },
+  "createNewTask": "สร้างงานใหม่",
+  "@createNewTask": {
+    "description": "การดำเนินการสร้างงานใหม่"
+  },
+  "completed": "เสร็จสมบูรณ์",
+  "@completed": {
+    "description": "สถานะเสร็จสมบูรณ์"
+  },
+  "incomplete": "ยังไม่เสร็จ",
+  "@incomplete": {
+    "description": "สถานะยังไม่เสร็จ"
+  },
+  "statistics": "สถิติ",
+  "@statistics": {
+    "description": "หัวข้อกล่องโต้ตอบสถิติ"
+  },
+  "daysCompleted": "วันที่เสร็จสมบูรณ์",
+  "@daysCompleted": {
+    "description": "ป้ายกำกับวันที่เสร็จสมบูรณ์"
+  },
+  "day": "วัน",
+  "@day": {
+    "description": "วันเอกพจน์"
+  },
+  "days": "วัน",
+  "@days": {
+    "description": "วันพหูพจน์"
+  },
+  "done": "เสร็จสิ้น",
+  "@done": {
+    "description": "ปุ่มเสร็จสิ้น"
+  },
+  "history": "ประวัติ",
+  "@history": {
+    "description": "หัวข้อกล่องโต้ตอบประวัติ"
+  },
+  "noHistory": "ไม่มีประวัติ",
+  "@noHistory": {
+    "description": "ข้อความเมื่อไม่มีประวัติ"
+  },
+  "viewHistory": "ดูประวัติ",
+  "@viewHistory": {
+    "description": "คำแนะนำเครื่องมือดูประวัติ"
+  },
+  "statisticsTooltip": "สถิติ",
+  "@statisticsTooltip": {
+    "description": "คำแนะนำเครื่องมือสถิติ"
+  },
+  "addTask": "เพิ่มงาน",
+  "@addTask": {
+    "description": "คำแนะนำเครื่องมือเพิ่มงาน"
+  },
+  "editTasks": "แก้ไขงาน",
+  "@editTasks": {
+    "description": "คำแนะนำเครื่องมือแก้ไขงาน"
+  },
+  "youCanOnlyAddTasksForToday": "คุณสามารถเพิ่มงานได้เฉพาะวันนี้เท่านั้น!",
+  "@youCanOnlyAddTasksForToday": {
+    "description": "ข้อความแสดงข้อผิดพลาดเมื่อพยายามเพิ่มงานสำหรับวันที่ไม่ใช่วันนี้"
+  },
+  "monthNames": "{month}",
+  "@monthNames": {
+    "description": "ชื่อเดือน",
+    "placeholders": {
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "dayOfMonth": "{day}",
+  "@dayOfMonth": {
+    "description": "วันของเดือน",
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "dayLabel": "{day}",
+  "@dayLabel": {
+    "description": "ป้ายกำกับวัน（อา, จ, อ ฯลฯ）",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "taskCount": "{completed}/{total}",
+  "@taskCount": {
+    "description": "จำนวนงานที่เสร็จสมบูรณ์",
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "completedDaysCount": "{count} {count, plural, =1{วัน} other{วัน}}",
+  "@completedDaysCount": {
+    "description": "จำนวนวันที่เสร็จสมบูรณ์ (พร้อมพหูพจน์)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "monthHistoryDays": "{count} {count, plural, =1{วัน} other{วัน}}",
+  "@monthHistoryDays": {
+    "description": "จำนวนวันในประวัติเดือน",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayNumber": "วันที่ {day}",
+  "@dayNumber": {
+    "description": "ป้ายกำกับหมายเลขวัน",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  }
+}

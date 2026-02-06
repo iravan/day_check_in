@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import '../services/storage_service.dart';
+import '../constants/app_colors.dart';
 
 class StatisticsDialog extends StatefulWidget {
   const StatisticsDialog({super.key});
@@ -29,85 +31,79 @@ class _StatisticsDialogState extends State<StatisticsDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: AppColors.white,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(14),
       ),
-      title: Row(
-        children: [
-          Icon(
-            Icons.bar_chart,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-          const SizedBox(width: 12),
-          const Text(
-            'Statistics',
-            style: TextStyle(fontWeight: FontWeight.w600),
-          ),
-        ],
+      title: Text(
+        AppLocalizations.of(context)!.statistics,
+        style: TextStyle(
+          fontSize: 17,
+          fontWeight: FontWeight.w600,
+          color: AppColors.black,
+        ),
       ),
       content: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                const SizedBox(height: 8),
                 Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
+                  width: 60,
+                  height: 60,
+                  decoration: const BoxDecoration(
+                    color: AppColors.green,
                     shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.green.shade400,
-                        Colors.green.shade600,
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
                   ),
                   child: const Icon(
                     Icons.celebration,
-                    size: 48,
-                    color: Colors.white,
+                    size: 32,
+                    color: AppColors.white,
                   ),
                 ),
                 const SizedBox(height: 24),
                 Text(
-                  'Total Days Completed',
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
-                ),
-                const SizedBox(height: 12),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                  decoration: BoxDecoration(
-                    color: Colors.green.shade50,
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Text(
-                    '$_completedDaysCount',
-                    style: TextStyle(
-                      fontSize: 56,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.green.shade700,
-                      height: 1,
-                    ),
+                  AppLocalizations.of(context)!.daysCompleted,
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.gray,
                   ),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 8),
                 Text(
-                  _completedDaysCount == 1
-                      ? 'day with all tasks completed'
-                      : 'days with all tasks completed',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.grey.shade600,
-                      ),
+                  '$_completedDaysCount',
+                  style: const TextStyle(
+                    fontSize: 48,
+                    fontWeight: FontWeight.w300,
+                    color: AppColors.black,
+                    height: 1,
+                    letterSpacing: -1,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  AppLocalizations.of(context)!.completedDaysCount(_completedDaysCount),
+                  style: const TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.gray,
+                  ),
                 ),
               ],
             ),
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: const Text('Close'),
+          child: Text(
+            AppLocalizations.of(context)!.done,
+            style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.w600,
+              color: AppColors.blue,
+            ),
+          ),
         ),
       ],
     );

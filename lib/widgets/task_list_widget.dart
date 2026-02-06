@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import '../models/task.dart';
 import '../services/date_service.dart';
+import '../constants/app_colors.dart';
+import 'edit_task_dialog.dart';
+import 'task_edit_menu.dart';
 
-class TaskListWidget extends StatelessWidget {
+class TaskListWidget extends StatefulWidget {
   final List<Task> tasks;
   final Function(Task) onTaskToggle;
   final Function(Task) onTaskDelete;
+  final Function(Task, String) onTaskEdit;
+  final Function(String) onCreateTask;
   final DateTime selectedDate;
 
   const TaskListWidget({
@@ -13,34 +19,94 @@ class TaskListWidget extends StatelessWidget {
     required this.tasks,
     required this.onTaskToggle,
     required this.onTaskDelete,
+    required this.onTaskEdit,
+    required this.onCreateTask,
     required this.selectedDate,
   });
 
   @override
+  State<TaskListWidget> createState() => _TaskListWidgetState();
+}
+
+class _TaskListWidgetState extends State<TaskListWidget> {
+  late PageController _pageController;
+  int _currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void didUpdateWidget(TaskListWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.tasks.length != oldWidget.tasks.length) {
+      // Reset to first page if tasks changed
+      _currentPage = 0;
+      if (_pageController.hasClients) {
+        _pageController.jumpToPage(0);
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _showEditMenu() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) => TaskEditMenu(
+        task: widget.tasks.isNotEmpty ? widget.tasks[_currentPage] : null,
+        onEdit: widget.tasks.isNotEmpty
+            ? (task) async {
+                final newTitle = await showDialog<String>(
+                  context: context,
+                  builder: (context) => EditTaskDialog(task: task),
+                );
+                if (newTitle != null && newTitle.isNotEmpty) {
+                  widget.onTaskEdit(task, newTitle);
+                }
+              }
+            : null,
+        onDelete: widget.tasks.isNotEmpty
+            ? (task) {
+                widget.onTaskDelete(task);
+              }
+            : null,
+        onCreate: () async {
+          final title = await showDialog<String>(
+            context: context,
+            builder: (context) => const EditTaskDialog(),
+          );
+          if (title != null && title.isNotEmpty) {
+            widget.onCreateTask(title);
+          }
+        },
+      ),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     final now = DateService.now;
-    final isToday = selectedDate.year == now.year &&
-        selectedDate.month == now.month &&
-        selectedDate.day == now.day;
+    final isToday = widget.selectedDate.year == now.year &&
+        widget.selectedDate.month == now.month &&
+        widget.selectedDate.day == now.day;
 
     return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
-      ),
+      color: AppColors.background,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // iOS style section header with edit button
           Container(
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface,
-              border: Border(
-                bottom: BorderSide(
-                  color: Colors.grey.shade200,
-                  width: 1,
-                ),
-              ),
-            ),
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+            color: AppColors.background,
             child: Row(
               children: [
                 Expanded(
@@ -48,80 +114,93 @@ class TaskListWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        isToday ? 'Today\'s Check-in' : 'Check-in for ${_formatDate(selectedDate)}',
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w700,
-                          color: Theme.of(context).colorScheme.onSurface,
+                        isToday 
+                            ? AppLocalizations.of(context)!.today 
+                            : _formatDate(widget.selectedDate),
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.gray,
+                          letterSpacing: -0.08,
                         ),
                       ),
-                      const SizedBox(height: 4),
+                      const SizedBox(height: 2),
                       Text(
-                        'Tasks are shared across all days',
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: Colors.grey.shade600,
+                        AppLocalizations.of(context)!.tasks,
+                        style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.black,
+                          letterSpacing: 0.35,
                         ),
                       ),
                     ],
                   ),
                 ),
-                if (tasks.isNotEmpty)
+                // Edit button
+                IconButton(
+                  icon: const Icon(
+                    Icons.edit,
+                    color: AppColors.blue,
+                    size: 22,
+                  ),
+                  onPressed: _showEditMenu,
+                  tooltip: AppLocalizations.of(context)!.editTasks,
+                ),
+                if (widget.tasks.isNotEmpty)
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                     decoration: BoxDecoration(
-                      color: tasks.every((t) => t.isCompleted)
-                          ? Colors.green.shade50
-                          : Colors.grey.shade100,
-                      borderRadius: BorderRadius.circular(20),
+                      color: widget.tasks.every((t) => t.isCompleted)
+                          ? AppColors.green
+                          : AppColors.gray,
+                      borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
-                      '${tasks.where((t) => t.isCompleted).length}/${tasks.length}',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: tasks.every((t) => t.isCompleted)
-                            ? Colors.green.shade700
-                            : Colors.grey.shade700,
+                      '${widget.tasks.where((t) => t.isCompleted).length}/${widget.tasks.length}',
+                      style: const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.white,
                       ),
                     ),
                   ),
               ],
             ),
           ),
-          if (tasks.isEmpty)
+          if (widget.tasks.isEmpty)
             Expanded(
               child: Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(48.0),
+                  padding: const EdgeInsets.all(32.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
-                        Icons.task_alt_outlined,
-                        size: 64,
-                        color: Colors.grey.shade300,
+                      const Icon(
+                        Icons.check_circle_outline,
+                        size: 48,
+                        color: AppColors.lightGray,
                       ),
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 16),
                       Text(
-                        'No tasks yet',
+                        AppLocalizations.of(context)!.noTasks,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey.shade700,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.gray,
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 8),
                       Text(
                         isToday 
-                            ? 'Tap the + button to add a task.\nTasks will appear on all days.'
-                            : 'Add tasks on today\'s date.\nTasks are shared across all days.',
+                            ? AppLocalizations.of(context)!.tapToAddTask
+                            : AppLocalizations.of(context)!.addTasksOnToday,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey.shade600,
-                          height: 1.5,
+                        style: const TextStyle(
+                          fontSize: 15,
+                          color: AppColors.gray,
+                          height: 1.4,
                         ),
                       ),
                     ],
@@ -131,100 +210,17 @@ class TaskListWidget extends StatelessWidget {
             )
           else
             Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                itemCount: tasks.length,
+              child: PageView.builder(
+                controller: _pageController,
+                onPageChanged: (index) {
+                  setState(() {
+                    _currentPage = index;
+                  });
+                },
+                itemCount: widget.tasks.length,
                 itemBuilder: (context, index) {
-                  final task = tasks[index];
-                  return TweenAnimationBuilder<double>(
-                    duration: Duration(milliseconds: 300 + (index * 50)),
-                    tween: Tween(begin: 0.0, end: 1.0),
-                    curve: Curves.easeOut,
-                    builder: (context, value, child) {
-                      return Transform.translate(
-                        offset: Offset(0, 20 * (1 - value)),
-                        child: Opacity(
-                          opacity: value,
-                          child: child,
-                        ),
-                      );
-                    },
-                    child: Card(
-                      elevation: task.isCompleted ? 0 : 2,
-                      margin: const EdgeInsets.only(bottom: 12),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        side: task.isCompleted
-                            ? BorderSide(color: Colors.green.withOpacity(0.3), width: 1.5)
-                            : BorderSide(color: Colors.grey.shade200, width: 1),
-                      ),
-                      child: Container(
-                        decoration: task.isCompleted
-                            ? BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.green.shade50,
-                                    Colors.white,
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                              )
-                            : BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                                color: Theme.of(context).colorScheme.surface,
-                              ),
-                        child: ListTile(
-                          contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 12,
-                          ),
-                          leading: Transform.scale(
-                            scale: 1.2,
-                            child: Checkbox(
-                              value: task.isCompleted,
-                              onChanged: (value) {
-                                onTaskToggle(task);
-                              },
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              fillColor: task.isCompleted
-                                  ? MaterialStateProperty.all(Colors.green.shade400)
-                                  : null,
-                            ),
-                          ),
-                          title: AnimatedDefaultTextStyle(
-                            duration: const Duration(milliseconds: 200),
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: task.isCompleted
-                                  ? FontWeight.w500
-                                  : FontWeight.w600,
-                              decoration: task.isCompleted
-                                  ? TextDecoration.lineThrough
-                                  : TextDecoration.none,
-                              color: task.isCompleted
-                                  ? Colors.grey.shade500
-                                  : Theme.of(context).colorScheme.onSurface,
-                              decorationThickness: 2,
-                              decorationColor: Colors.grey.shade400,
-                            ),
-                            child: Text(task.title),
-                          ),
-                          trailing: IconButton(
-                            icon: Icon(
-                              Icons.delete_outline,
-                              color: Colors.red.shade400,
-                            ),
-                            onPressed: () => onTaskDelete(task),
-                            splashRadius: 20,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
+                  final task = widget.tasks[index];
+                  return _buildTaskCard(task, index);
                 },
               ),
             ),
@@ -233,11 +229,170 @@ class TaskListWidget extends StatelessWidget {
     );
   }
 
-  String _formatDate(DateTime date) {
-    final months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-    ];
-    return '${months[date.month - 1]} ${date.day}, ${date.year}';
+  Widget _buildTaskCard(Task task, int index) {
+    return GestureDetector(
+      onTap: () => widget.onTaskToggle(task),
+      child: Container(
+        margin: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 10,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Circle indicator
+              GestureDetector(
+                onTap: () => widget.onTaskToggle(task),
+                child: Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: task.isCompleted
+                        ? AppColors.green
+                        : Colors.transparent,
+                    border: Border.all(
+                      color: task.isCompleted
+                          ? AppColors.green
+                          : AppColors.gray,
+                      width: task.isCompleted ? 0 : 3,
+                    ),
+                  ),
+                  child: task.isCompleted
+                      ? const Icon(
+                          Icons.check,
+                          color: AppColors.white,
+                          size: 40,
+                        )
+                      : Container(
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: CustomPaint(
+                            painter: _CircleLinesPainter(),
+                          ),
+                        ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              // Task title
+              Text(
+                task.title,
+                textAlign: TextAlign.center,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w600,
+                  color: task.isCompleted
+                      ? AppColors.gray
+                      : AppColors.black,
+                  decoration: task.isCompleted
+                      ? TextDecoration.lineThrough
+                      : TextDecoration.none,
+                  decorationThickness: 2,
+                  decorationColor: AppColors.gray,
+                ),
+              ),
+              const SizedBox(height: 6),
+              // Task status
+              Text(
+                task.isCompleted 
+                    ? AppLocalizations.of(context)!.completed 
+                    : AppLocalizations.of(context)!.incomplete,
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w400,
+                  color: task.isCompleted
+                      ? AppColors.green
+                      : AppColors.gray,
+                ),
+              ),
+              const SizedBox(height: 12),
+              // Page indicator
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                  widget.tasks.length,
+                  (i) => Container(
+                    width: 6,
+                    height: 6,
+                    margin: const EdgeInsets.symmetric(horizontal: 3),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: i == index
+                          ? AppColors.blue
+                          : AppColors.lightGray,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
+
+  String _formatDate(DateTime date) {
+    final now = DateService.now;
+    final today = DateTime(now.year, now.month, now.day);
+    final yesterday = today.subtract(const Duration(days: 1));
+    final dateOnly = DateTime(date.year, date.month, date.day);
+    
+    if (dateOnly == today) {
+      return AppLocalizations.of(context)!.today;
+    } else if (dateOnly == yesterday) {
+      return AppLocalizations.of(context)!.yesterday;
+    } else {
+      // Use DateFormat for localized month names
+      final monthNames = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+      ];
+      return '${monthNames[date.month - 1]} ${date.day}';
+    }
+  }
+}
+
+// Custom painter for drawing lines in incomplete circle
+class _CircleLinesPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = AppColors.gray
+      ..strokeWidth = 2
+      ..style = PaintingStyle.stroke;
+
+    final center = Offset(size.width / 2, size.height / 2);
+    final radius = size.width / 2 - 6;
+
+    // Draw horizontal line
+    canvas.drawLine(
+      Offset(center.dx - radius * 0.4, center.dy),
+      Offset(center.dx + radius * 0.4, center.dy),
+      paint,
+    );
+
+    // Draw vertical line
+    canvas.drawLine(
+      Offset(center.dx, center.dy - radius * 0.4),
+      Offset(center.dx, center.dy + radius * 0.4),
+      paint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

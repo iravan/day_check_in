@@ -1,0 +1,189 @@
+{
+  "@@locale": "ja",
+  "appTitle": "日次チェックイン",
+  "@appTitle": {
+    "description": "アプリケーションのタイトル"
+  },
+  "today": "今日",
+  "@today": {
+    "description": "今日のラベル"
+  },
+  "yesterday": "昨日",
+  "@yesterday": {
+    "description": "昨日のラベル"
+  },
+  "tasks": "タスク",
+  "@tasks": {
+    "description": "タスクセクションのラベル"
+  },
+  "noTasks": "タスクなし",
+  "@noTasks": {
+    "description": "タスクがない場合のメッセージ"
+  },
+  "tapToAddTask": "+ をタップしてタスクを追加",
+  "@tapToAddTask": {
+    "description": "タスクを追加するヒント"
+  },
+  "addTasksOnToday": "今日の日付にタスクを追加",
+  "@addTasksOnToday": {
+    "description": "今日にタスクを追加するヒント"
+  },
+  "newTask": "新しいタスク",
+  "@newTask": {
+    "description": "新しいタスクダイアログのタイトル"
+  },
+  "editTask": "タスクを編集",
+  "@editTask": {
+    "description": "タスク編集ダイアログのタイトル"
+  },
+  "taskName": "タスク名",
+  "@taskName": {
+    "description": "タスク名入力のプレースホルダー"
+  },
+  "cancel": "キャンセル",
+  "@cancel": {
+    "description": "キャンセルボタン"
+  },
+  "add": "追加",
+  "@add": {
+    "description": "追加ボタン"
+  },
+  "save": "保存",
+  "@save": {
+    "description": "保存ボタン"
+  },
+  "edit": "編集",
+  "@edit": {
+    "description": "編集アクション"
+  },
+  "delete": "削除",
+  "@delete": {
+    "description": "削除アクション"
+  },
+  "createNewTask": "新しいタスクを作成",
+  "@createNewTask": {
+    "description": "新しいタスクを作成するアクション"
+  },
+  "completed": "完了",
+  "@completed": {
+    "description": "完了状態"
+  },
+  "incomplete": "未完了",
+  "@incomplete": {
+    "description": "未完了状態"
+  },
+  "statistics": "統計",
+  "@statistics": {
+    "description": "統計ダイアログのタイトル"
+  },
+  "daysCompleted": "完了日数",
+  "@daysCompleted": {
+    "description": "完了日数のラベル"
+  },
+  "day": "日",
+  "@day": {
+    "description": "単数日"
+  },
+  "days": "日",
+  "@days": {
+    "description": "複数日"
+  },
+  "done": "完了",
+  "@done": {
+    "description": "完了ボタン"
+  },
+  "history": "履歴",
+  "@history": {
+    "description": "履歴ダイアログのタイトル"
+  },
+  "noHistory": "履歴なし",
+  "@noHistory": {
+    "description": "履歴がない場合のメッセージ"
+  },
+  "viewHistory": "履歴を表示",
+  "@viewHistory": {
+    "description": "履歴を表示するツールチップ"
+  },
+  "statisticsTooltip": "統計",
+  "@statisticsTooltip": {
+    "description": "統計ツールチップ"
+  },
+  "addTask": "タスクを追加",
+  "@addTask": {
+    "description": "タスクを追加するツールチップ"
+  },
+  "editTasks": "タスクを編集",
+  "@editTasks": {
+    "description": "タスクを編集するツールチップ"
+  },
+  "youCanOnlyAddTasksForToday": "今日の日付にのみタスクを追加できます！",
+  "@youCanOnlyAddTasksForToday": {
+    "description": "今日以外の日付にタスクを追加しようとしたときのエラーメッセージ"
+  },
+  "monthNames": "{month}",
+  "@monthNames": {
+    "description": "月名",
+    "placeholders": {
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "dayOfMonth": "{day}",
+  "@dayOfMonth": {
+    "description": "月の日",
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "dayLabel": "{day}",
+  "@dayLabel": {
+    "description": "日のラベル（日、月、火など）",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "taskCount": "{completed}/{total}",
+  "@taskCount": {
+    "description": "タスク完了数",
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "completedDaysCount": "{count} {count, plural, =1{日} other{日}}",
+  "@completedDaysCount": {
+    "description": "完了日数（複数形付き）",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "monthHistoryDays": "{count} {count, plural, =1{日} other{日}}",
+  "@monthHistoryDays": {
+    "description": "月の履歴日数",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayNumber": "{day}日目",
+  "@dayNumber": {
+    "description": "日数ラベル",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  }
+}

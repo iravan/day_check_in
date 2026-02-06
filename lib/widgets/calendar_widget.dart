@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import '../services/date_service.dart';
+import '../constants/app_colors.dart';
 
 class CalendarWidget extends StatefulWidget {
   final DateTime currentMonth;
@@ -34,148 +36,131 @@ class _CalendarWidgetState extends State<CalendarWidget> {
       'July', 'August', 'September', 'October', 'November', 'December'
     ];
 
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
-          child: Text(
-            '${monthNames[currentMonth.month - 1]} ${currentMonth.year}',
-            style: TextStyle(
-              fontSize: 26,
-              fontWeight: FontWeight.w700,
-              color: Theme.of(context).colorScheme.primary,
-              letterSpacing: -0.5,
+    return Container(
+      color: AppColors.white,
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
+      child: Column(
+        children: [
+          // iOS Calendar style header
+          Container(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '${monthNames[currentMonth.month - 1]} ${currentMonth.year}',
+                  style: const TextStyle(
+                    fontSize: 34,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.black,
+                    letterSpacing: 0.37,
+                  ),
+                ),
+              ],
             ),
           ),
-        ),
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _DayLabel('Mon'),
-            _DayLabel('Tue'),
-            _DayLabel('Wed'),
-            _DayLabel('Thu'),
-            _DayLabel('Fri'),
-            _DayLabel('Sat'),
-            _DayLabel('Sun'),
-          ],
-        ),
-        const SizedBox(height: 8),
-        ...List.generate(
-          ((daysInMonth + firstWeekday - 1) / 7).ceil(),
-          (weekIndex) {
-            return Row(
+          // Day labels - iOS style
+          Container(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: List.generate(7, (dayIndex) {
-                final dayNumber = weekIndex * 7 + dayIndex - firstWeekday + 2;
-                
-                if (dayNumber < 1 || dayNumber > daysInMonth) {
-                  return const Expanded(child: SizedBox());
-                }
+              children: [
+                _DayLabel('S'),
+                _DayLabel('M'),
+                _DayLabel('T'),
+                _DayLabel('W'),
+                _DayLabel('T'),
+                _DayLabel('F'),
+                _DayLabel('S'),
+              ],
+            ),
+          ),
+          ...List.generate(
+            ((daysInMonth + firstWeekday - 1) / 7).ceil(),
+            (weekIndex) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 4),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: List.generate(7, (dayIndex) {
+                  final dayNumber = weekIndex * 7 + dayIndex - firstWeekday + 2;
+                  
+                  if (dayNumber < 1 || dayNumber > daysInMonth) {
+                    return const Expanded(child: SizedBox());
+                  }
 
-                final date = DateTime(currentMonth.year, currentMonth.month, dayNumber);
-                final dateKey = _getDateKey(date);
-                final isCompleted = widget.completedDays.contains(dateKey);
-                final isToday = _isSameDay(date, now);
-                final isSelected = _selectedDate != null && _isSameDay(date, _selectedDate!);
-                final isFuture = date.isAfter(now) && !isToday;
+                  final date = DateTime(currentMonth.year, currentMonth.month, dayNumber);
+                  final dateKey = _getDateKey(date);
+                  final isCompleted = widget.completedDays.contains(dateKey);
+                  final isToday = _isSameDay(date, now);
+                  final isSelected = _selectedDate != null && _isSameDay(date, _selectedDate!);
+                  final isFuture = date.isAfter(now) && !isToday;
 
-                return Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(3.0),
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      curve: Curves.easeOut,
-                      child: Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          onTap: isFuture ? null : () {
-                            setState(() {
-                              _selectedDate = date;
-                            });
-                            widget.onDateSelected(date);
-                          },
-                          borderRadius: BorderRadius.circular(12),
-                          child: Container(
-                            height: 52,
-                            decoration: BoxDecoration(
-                              gradient: isCompleted
-                                  ? LinearGradient(
-                                      colors: [
-                                        Colors.green.shade400.withOpacity(0.3),
-                                        Colors.green.shade500.withOpacity(0.2),
-                                      ],
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.bottomRight,
-                                    )
-                                  : null,
-                              color: isCompleted
-                                  ? null
-                                  : isSelected
-                                      ? Theme.of(context).colorScheme.primaryContainer
-                                      : isToday
-                                          ? Theme.of(context).colorScheme.primary.withOpacity(0.1)
-                                          : Colors.transparent,
-                              border: Border.all(
-                                color: isToday
-                                    ? Theme.of(context).colorScheme.primary
-                                    : isSelected
-                                        ? Theme.of(context).colorScheme.primary.withOpacity(0.5)
-                                        : Colors.grey.withOpacity(0.2),
-                                width: isToday ? 2.5 : isSelected ? 2 : 1,
-                              ),
-                              borderRadius: BorderRadius.circular(12),
-                              boxShadow: isCompleted
-                                  ? [
-                                      BoxShadow(
-                                        color: Colors.green.withOpacity(0.2),
-                                        blurRadius: 8,
-                                        spreadRadius: 0,
-                                      ),
-                                    ]
-                                  : null,
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '$dayNumber',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: isToday || isSelected
-                                        ? FontWeight.w600
-                                        : FontWeight.w500,
-                                    color: isCompleted
-                                        ? Colors.green.shade700
+                  return Expanded(
+                    child: GestureDetector(
+                      onTap: isFuture ? null : () {
+                        setState(() {
+                          _selectedDate = date;
+                        });
+                        widget.onDateSelected(date);
+                      },
+                      child: Container(
+                        height: 44,
+                        margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: isCompleted
+                              ? AppColors.blue
+                              : isToday
+                                  ? AppColors.blue
+                                  : Colors.transparent,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                '$dayNumber',
+                                style: TextStyle(
+                                  fontSize: isToday ? 19 : 17,
+                                  fontWeight: isToday || isSelected
+                                      ? FontWeight.w600
+                                      : FontWeight.w400,
+                                color: isCompleted
+                                    ? AppColors.white
+                                    : isToday
+                                        ? AppColors.white
                                         : isFuture
-                                            ? Colors.grey.withOpacity(0.4)
-                                            : isToday || isSelected
-                                                ? Theme.of(context).colorScheme.primary
-                                                : null,
+                                            ? AppColors.lightGray
+                                            : isSelected
+                                                ? AppColors.blue
+                                                : AppColors.black,
+                                ),
+                              ),
+                              if (isCompleted && !isToday)
+                                const SizedBox(height: 2),
+                              if (isCompleted && !isToday)
+                                Container(
+                                  width: 4,
+                                  height: 4,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    shape: BoxShape.circle,
                                   ),
                                 ),
-                                if (isCompleted)
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 2),
-                                    child: Icon(
-                                      Icons.check_circle,
-                                      size: 14,
-                                      color: Colors.green.shade600,
-                                    ),
-                                  ),
-                              ],
-                            ),
+                            ],
                           ),
                         ),
                       ),
                     ),
-                  ),
-                );
-              }),
+                  );
+                }),
+              ),
             );
-          },
-        ),
-      ],
+            },
+          ),
+        ],
+      ),
     );
   }
 
@@ -201,11 +186,11 @@ class _DayLabel extends StatelessWidget {
       child: Center(
         child: Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 13,
-            fontWeight: FontWeight.w600,
-            color: Colors.grey.shade600,
-            letterSpacing: 0.5,
+            fontWeight: FontWeight.w400,
+            color: AppColors.gray,
+            letterSpacing: 0,
           ),
         ),
       ),

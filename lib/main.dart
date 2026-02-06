@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'l10n/app_localizations.dart';
 import 'models/task.dart';
 import 'services/storage_service.dart';
 import 'services/date_service.dart';
@@ -10,6 +12,7 @@ import 'widgets/statistics_dialog.dart';
 import 'widgets/history_dialog.dart';
 import 'widgets/debug_date_controls.dart';
 import 'widgets/celebration_dialog.dart';
+import 'constants/app_colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,33 +25,87 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Day Check In',
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', ''),
+        Locale('zh', 'CN'), // Simplified Chinese
+        Locale('zh', 'TW'), // Traditional Chinese (Taiwan)
+        Locale('zh', 'HK'), // Traditional Chinese (Hong Kong)
+        Locale('ja', ''), // Japanese
+        Locale('ko', ''), // Korean
+        Locale('th', ''), // Thai
+      ],
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF6366F1), // Indigo
-          brightness: Brightness.light,
+        // iOS color scheme
+        primaryColor: AppColors.blue,
+        scaffoldBackgroundColor: AppColors.background,
+        colorScheme: const ColorScheme.light(
+          primary: AppColors.blue,
+          secondary: AppColors.green,
+          surface: AppColors.white,
+          background: AppColors.background,
+          error: AppColors.red,
+          onPrimary: AppColors.white,
+          onSecondary: AppColors.white,
+          onSurface: AppColors.black,
+          onBackground: AppColors.black,
+          onError: AppColors.white,
         ),
-        useMaterial3: true,
+        useMaterial3: false, // Use Material 2 for iOS look
+        fontFamily: '.SF Pro Text', // iOS system font
+        appBarTheme: const AppBarTheme(
+          backgroundColor: AppColors.white,
+          foregroundColor: AppColors.black,
+          elevation: 0,
+          centerTitle: false,
+          titleTextStyle: TextStyle(
+            color: AppColors.black,
+            fontSize: 34,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 0.37,
+          ),
+        ),
         cardTheme: CardThemeData(
           elevation: 0,
+          color: AppColors.white,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(10),
           ),
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+          margin: EdgeInsets.zero,
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.blue,
+            foregroundColor: AppColors.white,
             elevation: 0,
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            textStyle: const TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),
         inputDecorationTheme: InputDecorationTheme(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
           filled: true,
+          fillColor: AppColors.background,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide.none,
+          ),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        ),
+        dividerTheme: const DividerThemeData(
+          color: AppColors.divider,
+          thickness: 0.5,
+          space: 0,
         ),
       ),
       home: const HomePage(),
@@ -211,6 +268,55 @@ class _HomePageState extends State<HomePage> {
     await _loadCompletedDays();
   }
 
+  Future<void> _editTask(Task task, String newTitle) async {
+    final updatedTask = task.copyWith(title: newTitle);
+    await StorageService.updateTask(updatedTask);
+    
+    // Reload tasks for current date
+    await _loadTasks();
+    await _loadCompletedDays();
+  }
+
+  Future<void> _createTask(String title) async {
+    final now = DateService.now;
+    final isToday = _selectedDate.year == now.year &&
+        _selectedDate.month == now.month &&
+        _selectedDate.day == now.day;
+
+    if (!isToday) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Row(
+            children: [
+              Icon(Icons.info_outline, color: Colors.white),
+              SizedBox(width: 12),
+              Text('You can only add tasks for today!'),
+            ],
+          ),
+          backgroundColor: Colors.orange.shade600,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+      );
+      return;
+    }
+
+    final newTask = Task(
+      id: now.millisecondsSinceEpoch.toString(),
+      title: title,
+      createdAt: now,
+    );
+
+    // Add to global tasks
+    await StorageService.addTask(newTask);
+    
+    // Reload tasks for current date to show the new task
+    await _loadTasks();
+    await _loadCompletedDays();
+  }
+
   void _showStatistics() {
     showDialog(
       context: context,
@@ -239,63 +345,64 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Day Check In',
-          style: TextStyle(fontWeight: FontWeight.w600),
-        ),
+        title: Text(AppLocalizations.of(context)!.appTitle),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
         elevation: 0,
         actions: [
           IconButton(
-            icon: const Icon(Icons.history),
+            icon: const Icon(Icons.history, color: AppColors.blue),
             onPressed: _showHistory,
-            tooltip: 'View History',
+            tooltip: AppLocalizations.of(context)!.viewHistory,
           ),
           IconButton(
-            icon: const Icon(Icons.bar_chart),
+            icon: const Icon(Icons.bar_chart, color: AppColors.blue),
             onPressed: _showStatistics,
-            tooltip: 'Statistics',
+            tooltip: AppLocalizations.of(context)!.statisticsTooltip,
           ),
         ],
       ),
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : Column(
-              children: [
-                DebugDateControls(
-                  onDateChanged: _onDateSimulated,
-                ),
-                Expanded(
-                  flex: 2,
-                  child: SingleChildScrollView(
-                    child: CalendarWidget(
-                      currentMonth: currentMonth,
-                      onDateSelected: _onDateSelected,
-                      completedDays: _completedDays,
+      body: SafeArea(
+        child: _isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : Column(
+                children: [
+                  DebugDateControls(
+                    onDateChanged: _onDateSimulated,
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: SingleChildScrollView(
+                      child: CalendarWidget(
+                        currentMonth: currentMonth,
+                        onDateSelected: _onDateSelected,
+                        completedDays: _completedDays,
+                      ),
                     ),
                   ),
+                Container(
+                  height: 0.5,
+                  color: AppColors.divider,
                 ),
-                Divider(
-                  height: 1,
-                  thickness: 1,
-                  color: Colors.grey.shade200,
-                ),
-                Expanded(
-                  flex: 3,
-                  child: TaskListWidget(
-                    tasks: _tasks,
-                    onTaskToggle: _toggleTask,
-                    onTaskDelete: _deleteTask,
-                    selectedDate: _selectedDate,
+                  Expanded(
+                    flex: 3,
+                    child: TaskListWidget(
+                      tasks: _tasks,
+                      onTaskToggle: _toggleTask,
+                      onTaskDelete: _deleteTask,
+                      onTaskEdit: _editTask,
+                      onCreateTask: _createTask,
+                      selectedDate: _selectedDate,
+                    ),
                   ),
-                ),
-              ],
-            ),
-      floatingActionButton: FloatingActionButton.extended(
+                ],
+              ),
+      ),
+      floatingActionButton: FloatingActionButton(
         onPressed: _addTask,
-        tooltip: 'Add Task',
-        icon: const Icon(Icons.add),
-        label: const Text('Add Task'),
-        elevation: 2,
+        tooltip: AppLocalizations.of(context)!.addTask,
+        backgroundColor: AppColors.blue,
+        child: const Icon(Icons.add, color: AppColors.white),
       ),
     );
   }

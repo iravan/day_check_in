@@ -1,0 +1,189 @@
+{
+  "@@locale": "en",
+  "appTitle": "Day Check In",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "today": "Today",
+  "@today": {
+    "description": "Label for today"
+  },
+  "yesterday": "Yesterday",
+  "@yesterday": {
+    "description": "Label for yesterday"
+  },
+  "tasks": "Tasks",
+  "@tasks": {
+    "description": "Label for tasks section"
+  },
+  "noTasks": "No Tasks",
+  "@noTasks": {
+    "description": "Message when there are no tasks"
+  },
+  "tapToAddTask": "Tap + to add a task",
+  "@tapToAddTask": {
+    "description": "Hint to add a task"
+  },
+  "addTasksOnToday": "Add tasks on today's date",
+  "@addTasksOnToday": {
+    "description": "Hint to add tasks on today"
+  },
+  "newTask": "New Task",
+  "@newTask": {
+    "description": "Title for new task dialog"
+  },
+  "editTask": "Edit Task",
+  "@editTask": {
+    "description": "Title for edit task dialog"
+  },
+  "taskName": "Task name",
+  "@taskName": {
+    "description": "Placeholder for task name input"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button"
+  },
+  "add": "Add",
+  "@add": {
+    "description": "Add button"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Save button"
+  },
+  "edit": "Edit",
+  "@edit": {
+    "description": "Edit action"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Delete action"
+  },
+  "createNewTask": "Create New Task",
+  "@createNewTask": {
+    "description": "Create new task action"
+  },
+  "completed": "Completed",
+  "@completed": {
+    "description": "Completed status"
+  },
+  "incomplete": "Incomplete",
+  "@incomplete": {
+    "description": "Incomplete status"
+  },
+  "statistics": "Statistics",
+  "@statistics": {
+    "description": "Statistics dialog title"
+  },
+  "daysCompleted": "Days Completed",
+  "@daysCompleted": {
+    "description": "Days completed label"
+  },
+  "day": "day",
+  "@day": {
+    "description": "Singular day"
+  },
+  "days": "days",
+  "@days": {
+    "description": "Plural days"
+  },
+  "done": "Done",
+  "@done": {
+    "description": "Done button"
+  },
+  "history": "History",
+  "@history": {
+    "description": "History dialog title"
+  },
+  "noHistory": "No History",
+  "@noHistory": {
+    "description": "Message when there is no history"
+  },
+  "viewHistory": "View History",
+  "@viewHistory": {
+    "description": "View history tooltip"
+  },
+  "statisticsTooltip": "Statistics",
+  "@statisticsTooltip": {
+    "description": "Statistics tooltip"
+  },
+  "addTask": "Add Task",
+  "@addTask": {
+    "description": "Add task tooltip"
+  },
+  "editTasks": "Edit Tasks",
+  "@editTasks": {
+    "description": "Edit tasks tooltip"
+  },
+  "youCanOnlyAddTasksForToday": "You can only add tasks for today!",
+  "@youCanOnlyAddTasksForToday": {
+    "description": "Error message when trying to add tasks for non-today"
+  },
+  "monthNames": "{month}",
+  "@monthNames": {
+    "description": "Month names",
+    "placeholders": {
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "dayOfMonth": "{day}",
+  "@dayOfMonth": {
+    "description": "Day of month",
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "dayLabel": "{day}",
+  "@dayLabel": {
+    "description": "Day label (S, M, T, etc.)",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "taskCount": "{completed}/{total}",
+  "@taskCount": {
+    "description": "Task completion count",
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "completedDaysCount": "{count} {count, plural, =1{day} other{days}}",
+  "@completedDaysCount": {
+    "description": "Completed days count with plural",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "monthHistoryDays": "{count} {count, plural, =1{day} other{days}}",
+  "@monthHistoryDays": {
+    "description": "Month history days count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayNumber": "Day {day}",
+  "@dayNumber": {
+    "description": "Day number label",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  }
+}

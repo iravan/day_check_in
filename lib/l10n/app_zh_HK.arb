@@ -1,0 +1,189 @@
+{
+  "@@locale": "zh_HK",
+  "appTitle": "每日打卡",
+  "@appTitle": {
+    "description": "應用程式標題"
+  },
+  "today": "今天",
+  "@today": {
+    "description": "今天的標籤"
+  },
+  "yesterday": "昨天",
+  "@yesterday": {
+    "description": "昨天的標籤"
+  },
+  "tasks": "任務",
+  "@tasks": {
+    "description": "任務部分標籤"
+  },
+  "noTasks": "沒有任務",
+  "@noTasks": {
+    "description": "沒有任務時的訊息"
+  },
+  "tapToAddTask": "點擊 + 新增任務",
+  "@tapToAddTask": {
+    "description": "新增任務的提示"
+  },
+  "addTasksOnToday": "在今天新增任務",
+  "@addTasksOnToday": {
+    "description": "在今天新增任務的提示"
+  },
+  "newTask": "新任務",
+  "@newTask": {
+    "description": "新任務對話框標題"
+  },
+  "editTask": "編輯任務",
+  "@editTask": {
+    "description": "編輯任務對話框標題"
+  },
+  "taskName": "任務名稱",
+  "@taskName": {
+    "description": "任務名稱輸入佔位符"
+  },
+  "cancel": "取消",
+  "@cancel": {
+    "description": "取消按鈕"
+  },
+  "add": "新增",
+  "@add": {
+    "description": "新增按鈕"
+  },
+  "save": "儲存",
+  "@save": {
+    "description": "儲存按鈕"
+  },
+  "edit": "編輯",
+  "@edit": {
+    "description": "編輯操作"
+  },
+  "delete": "刪除",
+  "@delete": {
+    "description": "刪除操作"
+  },
+  "createNewTask": "建立新任務",
+  "@createNewTask": {
+    "description": "建立新任務操作"
+  },
+  "completed": "已完成",
+  "@completed": {
+    "description": "已完成狀態"
+  },
+  "incomplete": "未完成",
+  "@incomplete": {
+    "description": "未完成狀態"
+  },
+  "statistics": "統計",
+  "@statistics": {
+    "description": "統計對話框標題"
+  },
+  "daysCompleted": "完成天數",
+  "@daysCompleted": {
+    "description": "完成天數標籤"
+  },
+  "day": "天",
+  "@day": {
+    "description": "單數天"
+  },
+  "days": "天",
+  "@days": {
+    "description": "複數天"
+  },
+  "done": "完成",
+  "@done": {
+    "description": "完成按鈕"
+  },
+  "history": "歷史記錄",
+  "@history": {
+    "description": "歷史記錄對話框標題"
+  },
+  "noHistory": "沒有歷史記錄",
+  "@noHistory": {
+    "description": "沒有歷史記錄時的訊息"
+  },
+  "viewHistory": "查看歷史記錄",
+  "@viewHistory": {
+    "description": "查看歷史記錄工具提示"
+  },
+  "statisticsTooltip": "統計",
+  "@statisticsTooltip": {
+    "description": "統計工具提示"
+  },
+  "addTask": "新增任務",
+  "@addTask": {
+    "description": "新增任務工具提示"
+  },
+  "editTasks": "編輯任務",
+  "@editTasks": {
+    "description": "編輯任務工具提示"
+  },
+  "youCanOnlyAddTasksForToday": "您只能為今天新增任務！",
+  "@youCanOnlyAddTasksForToday": {
+    "description": "嘗試為非今天新增任務時的錯誤訊息"
+  },
+  "monthNames": "{month}",
+  "@monthNames": {
+    "description": "月份名稱",
+    "placeholders": {
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "dayOfMonth": "{day}",
+  "@dayOfMonth": {
+    "description": "月份中的日期",
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "dayLabel": "{day}",
+  "@dayLabel": {
+    "description": "日期標籤（日、一、二等）",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "taskCount": "{completed}/{total}",
+  "@taskCount": {
+    "description": "任務完成計數",
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "completedDaysCount": "{count} {count, plural, =1{天} other{天}}",
+  "@completedDaysCount": {
+    "description": "完成天數（帶複數）",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "monthHistoryDays": "{count} {count, plural, =1{天} other{天}}",
+  "@monthHistoryDays": {
+    "description": "月份歷史天數",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayNumber": "第 {day} 天",
+  "@dayNumber": {
+    "description": "天數標籤",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  }
+}

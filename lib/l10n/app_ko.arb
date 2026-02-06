@@ -1,0 +1,189 @@
+{
+  "@@locale": "ko",
+  "appTitle": "일일 체크인",
+  "@appTitle": {
+    "description": "애플리케이션 제목"
+  },
+  "today": "오늘",
+  "@today": {
+    "description": "오늘 레이블"
+  },
+  "yesterday": "어제",
+  "@yesterday": {
+    "description": "어제 레이블"
+  },
+  "tasks": "작업",
+  "@tasks": {
+    "description": "작업 섹션 레이블"
+  },
+  "noTasks": "작업 없음",
+  "@noTasks": {
+    "description": "작업이 없을 때 메시지"
+  },
+  "tapToAddTask": "+를 탭하여 작업 추가",
+  "@tapToAddTask": {
+    "description": "작업 추가 힌트"
+  },
+  "addTasksOnToday": "오늘 날짜에 작업 추가",
+  "@addTasksOnToday": {
+    "description": "오늘에 작업 추가 힌트"
+  },
+  "newTask": "새 작업",
+  "@newTask": {
+    "description": "새 작업 대화상자 제목"
+  },
+  "editTask": "작업 편집",
+  "@editTask": {
+    "description": "작업 편집 대화상자 제목"
+  },
+  "taskName": "작업 이름",
+  "@taskName": {
+    "description": "작업 이름 입력 플레이스홀더"
+  },
+  "cancel": "취소",
+  "@cancel": {
+    "description": "취소 버튼"
+  },
+  "add": "추가",
+  "@add": {
+    "description": "추가 버튼"
+  },
+  "save": "저장",
+  "@save": {
+    "description": "저장 버튼"
+  },
+  "edit": "편집",
+  "@edit": {
+    "description": "편집 작업"
+  },
+  "delete": "삭제",
+  "@delete": {
+    "description": "삭제 작업"
+  },
+  "createNewTask": "새 작업 만들기",
+  "@createNewTask": {
+    "description": "새 작업 만들기 작업"
+  },
+  "completed": "완료됨",
+  "@completed": {
+    "description": "완료 상태"
+  },
+  "incomplete": "미완료",
+  "@incomplete": {
+    "description": "미완료 상태"
+  },
+  "statistics": "통계",
+  "@statistics": {
+    "description": "통계 대화상자 제목"
+  },
+  "daysCompleted": "완료된 일수",
+  "@daysCompleted": {
+    "description": "완료된 일수 레이블"
+  },
+  "day": "일",
+  "@day": {
+    "description": "단수 일"
+  },
+  "days": "일",
+  "@days": {
+    "description": "복수 일"
+  },
+  "done": "완료",
+  "@done": {
+    "description": "완료 버튼"
+  },
+  "history": "기록",
+  "@history": {
+    "description": "기록 대화상자 제목"
+  },
+  "noHistory": "기록 없음",
+  "@noHistory": {
+    "description": "기록이 없을 때 메시지"
+  },
+  "viewHistory": "기록 보기",
+  "@viewHistory": {
+    "description": "기록 보기 도구 설명"
+  },
+  "statisticsTooltip": "통계",
+  "@statisticsTooltip": {
+    "description": "통계 도구 설명"
+  },
+  "addTask": "작업 추가",
+  "@addTask": {
+    "description": "작업 추가 도구 설명"
+  },
+  "editTasks": "작업 편집",
+  "@editTasks": {
+    "description": "작업 편집 도구 설명"
+  },
+  "youCanOnlyAddTasksForToday": "오늘 날짜에만 작업을 추가할 수 있습니다!",
+  "@youCanOnlyAddTasksForToday": {
+    "description": "오늘이 아닌 날짜에 작업을 추가하려고 할 때 오류 메시지"
+  },
+  "monthNames": "{month}",
+  "@monthNames": {
+    "description": "월 이름",
+    "placeholders": {
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "dayOfMonth": "{day}",
+  "@dayOfMonth": {
+    "description": "월의 일",
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "dayLabel": "{day}",
+  "@dayLabel": {
+    "description": "일 레이블（일, 월, 화 등）",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "taskCount": "{completed}/{total}",
+  "@taskCount": {
+    "description": "작업 완료 수",
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "completedDaysCount": "{count} {count, plural, =1{일} other{일}}",
+  "@completedDaysCount": {
+    "description": "완료된 일수 (복수형 포함)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "monthHistoryDays": "{count} {count, plural, =1{일} other{일}}",
+  "@monthHistoryDays": {
+    "description": "월 기록 일수",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayNumber": "{day}일",
+  "@dayNumber": {
+    "description": "일수 레이블",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  }
+}

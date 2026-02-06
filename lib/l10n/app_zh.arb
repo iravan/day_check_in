@@ -1,0 +1,189 @@
+{
+  "@@locale": "zh",
+  "appTitle": "每日打卡",
+  "@appTitle": {
+    "description": "应用程序标题"
+  },
+  "today": "今天",
+  "@today": {
+    "description": "今天的标签"
+  },
+  "yesterday": "昨天",
+  "@yesterday": {
+    "description": "昨天的标签"
+  },
+  "tasks": "任务",
+  "@tasks": {
+    "description": "任务部分标签"
+  },
+  "noTasks": "没有任务",
+  "@noTasks": {
+    "description": "没有任务时的消息"
+  },
+  "tapToAddTask": "点击 + 添加任务",
+  "@tapToAddTask": {
+    "description": "添加任务的提示"
+  },
+  "addTasksOnToday": "在今天添加任务",
+  "@addTasksOnToday": {
+    "description": "在今天添加任务的提示"
+  },
+  "newTask": "新任务",
+  "@newTask": {
+    "description": "新任务对话框标题"
+  },
+  "editTask": "编辑任务",
+  "@editTask": {
+    "description": "编辑任务对话框标题"
+  },
+  "taskName": "任务名称",
+  "@taskName": {
+    "description": "任务名称输入占位符"
+  },
+  "cancel": "取消",
+  "@cancel": {
+    "description": "取消按钮"
+  },
+  "add": "添加",
+  "@add": {
+    "description": "添加按钮"
+  },
+  "save": "保存",
+  "@save": {
+    "description": "保存按钮"
+  },
+  "edit": "编辑",
+  "@edit": {
+    "description": "编辑操作"
+  },
+  "delete": "删除",
+  "@delete": {
+    "description": "删除操作"
+  },
+  "createNewTask": "创建新任务",
+  "@createNewTask": {
+    "description": "创建新任务操作"
+  },
+  "completed": "已完成",
+  "@completed": {
+    "description": "已完成状态"
+  },
+  "incomplete": "未完成",
+  "@incomplete": {
+    "description": "未完成状态"
+  },
+  "statistics": "统计",
+  "@statistics": {
+    "description": "统计对话框标题"
+  },
+  "daysCompleted": "完成天数",
+  "@daysCompleted": {
+    "description": "完成天数标签"
+  },
+  "day": "天",
+  "@day": {
+    "description": "单数天"
+  },
+  "days": "天",
+  "@days": {
+    "description": "复数天"
+  },
+  "done": "完成",
+  "@done": {
+    "description": "完成按钮"
+  },
+  "history": "历史",
+  "@history": {
+    "description": "历史对话框标题"
+  },
+  "noHistory": "没有历史记录",
+  "@noHistory": {
+    "description": "没有历史记录时的消息"
+  },
+  "viewHistory": "查看历史",
+  "@viewHistory": {
+    "description": "查看历史工具提示"
+  },
+  "statisticsTooltip": "统计",
+  "@statisticsTooltip": {
+    "description": "统计工具提示"
+  },
+  "addTask": "添加任务",
+  "@addTask": {
+    "description": "添加任务工具提示"
+  },
+  "editTasks": "编辑任务",
+  "@editTasks": {
+    "description": "编辑任务工具提示"
+  },
+  "youCanOnlyAddTasksForToday": "您只能为今天添加任务！",
+  "@youCanOnlyAddTasksForToday": {
+    "description": "尝试为非今天添加任务时的错误消息"
+  },
+  "monthNames": "{month}",
+  "@monthNames": {
+    "description": "月份名称",
+    "placeholders": {
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "dayOfMonth": "{day}",
+  "@dayOfMonth": {
+    "description": "月份中的日期",
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "dayLabel": "{day}",
+  "@dayLabel": {
+    "description": "日期标签（日、一、二等）",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "taskCount": "{completed}/{total}",
+  "@taskCount": {
+    "description": "任务完成计数",
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "completedDaysCount": "{count} {count, plural, =1{天} other{天}}",
+  "@completedDaysCount": {
+    "description": "完成天数（带复数）",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "monthHistoryDays": "{count} {count, plural, =1{天} other{天}}",
+  "@monthHistoryDays": {
+    "description": "月份历史天数",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dayNumber": "第 {day} 天",
+  "@dayNumber": {
+    "description": "天数标签",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  }
+}

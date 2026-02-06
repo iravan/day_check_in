@@ -75,6 +75,16 @@ class StorageService {
     await saveAllTasks(tasks);
   }
 
+  // Update a global task
+  static Future<void> updateTask(Task updatedTask) async {
+    final tasks = await getAllTasks();
+    final index = tasks.indexWhere((task) => task.id == updatedTask.id);
+    if (index != -1) {
+      tasks[index] = updatedTask;
+      await saveAllTasks(tasks);
+    }
+  }
+
   // Delete a global task
   static Future<void> deleteTask(String taskId) async {
     final tasks = await getAllTasks();
