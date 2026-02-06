@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../l10n/app_localizations.dart';
 import '../models/task.dart';
 import '../services/date_service.dart';
@@ -357,11 +358,9 @@ class _TaskListWidgetState extends State<TaskListWidget> {
       return AppLocalizations.of(context)!.yesterday;
     } else {
       // Use DateFormat for localized month names
-      final monthNames = [
-        'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
-      ];
-      return '${monthNames[date.month - 1]} ${date.day}';
+      final locale = Localizations.localeOf(context).toString();
+      final dateFormat = DateFormat('MMMM d', locale);
+      return dateFormat.format(date);
     }
   }
 }

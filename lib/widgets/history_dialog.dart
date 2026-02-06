@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../l10n/app_localizations.dart';
 import '../services/storage_service.dart';
 import '../constants/app_colors.dart';
@@ -171,8 +172,7 @@ class _HistoryDialogState extends State<HistoryDialog> {
                               spacing: 8,
                               runSpacing: 8,
                               children: days.map((day) {
-                                final parts = day.split('-');
-                                final dayNumber = parts[2];
+                                final formattedDate = _formatDate(day);
                                 return Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                                   decoration: BoxDecoration(
@@ -189,7 +189,7 @@ class _HistoryDialogState extends State<HistoryDialog> {
                                       ),
                                       const SizedBox(width: 6),
                                       Text(
-                                        AppLocalizations.of(context)!.dayNumber(dayNumber),
+                                        formattedDate,
                                         style: const TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.w400,
@@ -216,12 +216,28 @@ class _HistoryDialogState extends State<HistoryDialog> {
 
   String _getMonthName(String monthKey) {
     final parts = monthKey.split('-');
-    final year = parts[0];
+    final year = int.parse(parts[0]);
     final month = int.parse(parts[1]);
-    final monthNames = [
-      'January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'
-    ];
-    return '${monthNames[month - 1]} $year';
+    final locale = Localizations.localeOf(context);
+    final date = DateTime(year, month, 1);
+    // Use yMMMM format which gives locale-appropriate "Year Month" format
+    // e.g., "January 2024" for English, "2024年1月" for Chinese
+    final dateFormat = DateFormat.yMMMM(locale.toString());
+    return dateFormat.format(date);
+  }
+
+  String _formatDate(String dateString) {
+    final parts = dateString.split('-');
+    if (parts.length != 3) return dateString;
+    
+    final year = int.parse(parts[0]);
+    final month = int.parse(parts[1]);
+    final day = int.parse(parts[2]);
+    final date = DateTime(year, month, day);
+    final locale = Localizations.localeOf(context);
+    
+    // Use localized date format (e.g., "MMMM d" for "January 15" or "M月d日" for "1月15日")
+    final dateFormat = DateFormat('MMMM d', locale.toString());
+    return dateFormat.format(date);
   }
 }
