@@ -95,7 +95,8 @@ class _TaskListWidgetState extends State<TaskListWidget> {
   @override
   Widget build(BuildContext context) {
     final now = DateService.now;
-    final isToday = widget.selectedDate.year == now.year &&
+    final isToday =
+        widget.selectedDate.year == now.year &&
         widget.selectedDate.month == now.month &&
         widget.selectedDate.day == now.day;
 
@@ -115,8 +116,8 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        isToday 
-                            ? AppLocalizations.of(context)!.today 
+                        isToday
+                            ? AppLocalizations.of(context)!.today
                             : _formatDate(widget.selectedDate),
                         style: const TextStyle(
                           fontSize: 13,
@@ -150,7 +151,10 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                 ),
                 if (widget.tasks.isNotEmpty)
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: widget.tasks.every((t) => t.isCompleted)
                           ? Theme.of(context).colorScheme.primary
@@ -194,7 +198,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        isToday 
+                        isToday
                             ? AppLocalizations.of(context)!.tapToAddTask
                             : AppLocalizations.of(context)!.addTasksOnToday,
                         textAlign: TextAlign.center,
@@ -221,7 +225,9 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                 itemCount: widget.tasks.length,
                 itemBuilder: (context, index) {
                   final task = widget.tasks[index];
-                  return _buildTaskCard(task, index);
+                  return Center(
+                    child: _buildTaskCard(task, index),
+                  );
                 },
               ),
             ),
@@ -280,9 +286,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                           ),
-                          child: CustomPaint(
-                            painter: _CircleLinesPainter(),
-                          ),
+                          child: CustomPaint(painter: _CircleLinesPainter()),
                         ),
                 ),
               ),
@@ -296,9 +300,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w600,
-                  color: task.isCompleted
-                      ? AppColors.gray
-                      : AppColors.black,
+                  color: task.isCompleted ? AppColors.gray : AppColors.black,
                   decoration: task.isCompleted
                       ? TextDecoration.lineThrough
                       : TextDecoration.none,
@@ -309,8 +311,8 @@ class _TaskListWidgetState extends State<TaskListWidget> {
               const SizedBox(height: 6),
               // Task status
               Text(
-                task.isCompleted 
-                    ? AppLocalizations.of(context)!.completed 
+                task.isCompleted
+                    ? AppLocalizations.of(context)!.completed
                     : AppLocalizations.of(context)!.incomplete,
                 style: TextStyle(
                   fontSize: 15,
@@ -351,7 +353,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
     final today = DateTime(now.year, now.month, now.day);
     final yesterday = today.subtract(const Duration(days: 1));
     final dateOnly = DateTime(date.year, date.month, date.day);
-    
+
     if (dateOnly == today) {
       return AppLocalizations.of(context)!.today;
     } else if (dateOnly == yesterday) {

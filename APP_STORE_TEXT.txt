@@ -1,0 +1,40 @@
+=== PROMOTIONAL TEXT (170 characters max) ===
+Build better habits with daily task check-ins. Track your progress, celebrate achievements, and stay motivated with a beautiful calendar interface.
+
+=== DESCRIPTION ===
+Day Check In is your personal daily task management companion designed to help you build consistent habits and track your progress effortlessly.
+
+KEY FEATURES:
+
+✨ Daily Task Management
+Create and manage your daily tasks with ease. Mark tasks as complete with a simple tap, and visual indicators show your progress at a glance.
+
+📅 Calendar View
+Beautiful calendar interface showing your completion history. Days are highlighted when all tasks are completed, helping you track your consistency over time.
+
+📊 Progress Tracking
+View statistics of your completed days and browse your history organized by month. See your improvement and stay motivated.
+
+🎨 Customizable Themes
+Choose from 9 beautiful color themes to personalize your app experience. Enjoy an iOS-inspired design that's both beautiful and functional.
+
+🌍 Multi-Language Support
+Available in English, Chinese (Simplified & Traditional), Japanese, Korean, and Thai. Fully localized interface for users worldwide.
+
+PERFECT FOR:
+• Building daily habits
+• Tracking personal goals
+• Staying organized
+• Maintaining consistency
+• Personal productivity
+
+Why Day Check In?
+Unlike complex task managers, Day Check In focuses on simplicity and daily consistency. With its intuitive calendar interface and visual progress tracking, you'll stay motivated to complete your tasks every day.
+
+Start your journey to better habits today!
+
+=== KEYWORDS (100 characters max, comma-separated) ===
+productivity,tasks,habits,calendar,daily,check-in,tracker,goals,organizer,reminder,todo,planner
+
+=== SUBTITLE (30 characters max) ===
+Daily task tracker & calendar

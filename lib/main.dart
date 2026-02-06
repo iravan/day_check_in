@@ -157,13 +157,14 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _initializeDefaultTasks();
-      _loadData();
+      _initializeAndLoadData();
     });
   }
 
-  Future<void> _initializeDefaultTasks() async {
+  Future<void> _initializeAndLoadData() async {
     if (!mounted) return;
+    
+    // Initialize default tasks first, then load data
     final localizations = AppLocalizations.of(context)!;
     final defaultTaskNames = [
       localizations.defaultTaskExercise,
@@ -171,7 +172,19 @@ class _HomePageState extends State<HomePage> {
       localizations.defaultTaskMeditation,
       localizations.defaultTaskHousework,
     ];
+    
     await StorageService.initializeDefaultTasks(defaultTaskNames);
+    
+    // Now load tasks and completed days
+    if (mounted) {
+      await _loadTasks();
+      await _loadCompletedDays();
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
   }
 
   Future<void> _loadData() async {

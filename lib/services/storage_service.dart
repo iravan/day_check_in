@@ -156,20 +156,41 @@ class StorageService {
 
   // Initialize default tasks if this is the first launch
   static Future<void> initializeDefaultTasks(List<String> defaultTaskNames) async {
-    final existingTasks = await getAllTasks();
-    
-    // Only initialize if no tasks exist
-    if (existingTasks.isEmpty) {
-      final now = DateTime.now();
-      final defaultTasks = defaultTaskNames.map((name) {
-        return Task(
-          id: 'default_${name}_${now.millisecondsSinceEpoch}_${defaultTaskNames.indexOf(name)}',
-          title: name,
-          createdAt: now,
-        );
-      }).toList();
+    try {
+      final existingTasks = await getAllTasks();
       
-      await saveAllTasks(defaultTasks);
+      // Only initialize if no tasks exist
+      if (existingTasks.isEmpty && defaultTaskNames.isNotEmpty) {
+        final now = DateTime.now();
+        final defaultTasks = defaultTaskNames.asMap().entries.map((entry) {
+          final index = entry.key;
+          final name = entry.value;
+          return Task(
+            id: 'default_${name}_${now.millisecondsSinceEpoch}_$index',
+            title: name,
+            createdAt: now,
+          );
+        }).toList();
+        
+        await saveAllTasks(defaultTasks);
+      }
+    } catch (e) {
+      // If there's an error, try to initialize anyway if tasks list is empty
+      final existingTasks = await getAllTasks();
+      if (existingTasks.isEmpty && defaultTaskNames.isNotEmpty) {
+        final now = DateTime.now();
+        final defaultTasks = defaultTaskNames.asMap().entries.map((entry) {
+          final index = entry.key;
+          final name = entry.value;
+          return Task(
+            id: 'default_${name}_${now.millisecondsSinceEpoch}_$index',
+            title: name,
+            createdAt: now,
+          );
+        }).toList();
+        
+        await saveAllTasks(defaultTasks);
+      }
     }
   }
 
