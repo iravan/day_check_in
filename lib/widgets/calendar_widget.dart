@@ -111,9 +111,9 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                         margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
                         decoration: BoxDecoration(
                           color: isCompleted
-                              ? AppColors.blue
+                              ? Theme.of(context).colorScheme.primary
                               : isToday
-                                  ? AppColors.blue
+                                  ? Theme.of(context).colorScheme.primary
                                   : Colors.transparent,
                           shape: BoxShape.circle,
                         ),
@@ -135,7 +135,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                                         : isFuture
                                             ? AppColors.lightGray
                                             : isSelected
-                                                ? AppColors.blue
+                                                ? Theme.of(context).colorScheme.primary
                                                 : AppColors.black,
                                 ),
                               ),

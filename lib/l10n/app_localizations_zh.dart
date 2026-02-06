@@ -144,6 +144,33 @@ class AppLocalizationsZh extends AppLocalizations {
   String dayNumber(String day) {
     return '第 $day 天';
   }
+
+  @override
+  String get defaultTaskExercise => '运动';
+
+  @override
+  String get defaultTaskStudy => '学习';
+
+  @override
+  String get defaultTaskMeditation => '冥想';
+
+  @override
+  String get defaultTaskHousework => '家务';
+
+  @override
+  String get chooseColorTheme => '选择颜色主题';
+
+  @override
+  String get close => '关闭';
+
+  @override
+  String get congratulations => '🎉 恭喜！🎉';
+
+  @override
+  String get allTasksCompletedToday => '今天的所有任务都已完成！';
+
+  @override
+  String get keepUpGreatWork => '继续加油！💪';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -286,6 +313,33 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String dayNumber(String day) {
     return '第 $day 天';
   }
+
+  @override
+  String get defaultTaskExercise => '运动';
+
+  @override
+  String get defaultTaskStudy => '学习';
+
+  @override
+  String get defaultTaskMeditation => '冥想';
+
+  @override
+  String get defaultTaskHousework => '家务';
+
+  @override
+  String get chooseColorTheme => '选择颜色主题';
+
+  @override
+  String get close => '关闭';
+
+  @override
+  String get congratulations => '🎉 恭喜！🎉';
+
+  @override
+  String get allTasksCompletedToday => '今天的所有任务都已完成！';
+
+  @override
+  String get keepUpGreatWork => '继续加油！💪';
 }
 
 /// The translations for Chinese, as used in Hong Kong (`zh_HK`).
@@ -428,6 +482,33 @@ class AppLocalizationsZhHk extends AppLocalizationsZh {
   String dayNumber(String day) {
     return '第 $day 天';
   }
+
+  @override
+  String get defaultTaskExercise => '運動';
+
+  @override
+  String get defaultTaskStudy => '學習';
+
+  @override
+  String get defaultTaskMeditation => '冥想';
+
+  @override
+  String get defaultTaskHousework => '家務';
+
+  @override
+  String get chooseColorTheme => '選擇顏色主題';
+
+  @override
+  String get close => '關閉';
+
+  @override
+  String get congratulations => '🎉 恭喜！🎉';
+
+  @override
+  String get allTasksCompletedToday => '今天的所有任務都已完成！';
+
+  @override
+  String get keepUpGreatWork => '繼續加油！💪';
 }
 
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).
@@ -570,4 +651,31 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String dayNumber(String day) {
     return '第 $day 天';
   }
+
+  @override
+  String get defaultTaskExercise => '運動';
+
+  @override
+  String get defaultTaskStudy => '學習';
+
+  @override
+  String get defaultTaskMeditation => '冥想';
+
+  @override
+  String get defaultTaskHousework => '家務';
+
+  @override
+  String get chooseColorTheme => '選擇顏色主題';
+
+  @override
+  String get close => '關閉';
+
+  @override
+  String get congratulations => '🎉 恭喜！🎉';
+
+  @override
+  String get allTasksCompletedToday => '今天的所有任務都已完成！';
+
+  @override
+  String get keepUpGreatWork => '繼續加油！💪';
 }

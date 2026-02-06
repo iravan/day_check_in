@@ -144,4 +144,31 @@ class AppLocalizationsKo extends AppLocalizations {
   String dayNumber(String day) {
     return '$day일';
   }
+
+  @override
+  String get defaultTaskExercise => '운동';
+
+  @override
+  String get defaultTaskStudy => '공부';
+
+  @override
+  String get defaultTaskMeditation => '명상';
+
+  @override
+  String get defaultTaskHousework => '집안일';
+
+  @override
+  String get chooseColorTheme => '색상 테마 선택';
+
+  @override
+  String get close => '닫기';
+
+  @override
+  String get congratulations => '🎉 축하합니다! 🎉';
+
+  @override
+  String get allTasksCompletedToday => '오늘의 모든 작업이 완료되었습니다!';
+
+  @override
+  String get keepUpGreatWork => '계속 잘하세요! 💪';
 }

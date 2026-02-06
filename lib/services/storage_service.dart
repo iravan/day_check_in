@@ -154,6 +154,25 @@ class StorageService {
     return completedDays.where((day) => day.startsWith(monthKey)).toList();
   }
 
+  // Initialize default tasks if this is the first launch
+  static Future<void> initializeDefaultTasks(List<String> defaultTaskNames) async {
+    final existingTasks = await getAllTasks();
+    
+    // Only initialize if no tasks exist
+    if (existingTasks.isEmpty) {
+      final now = DateTime.now();
+      final defaultTasks = defaultTaskNames.map((name) {
+        return Task(
+          id: 'default_${name}_${now.millisecondsSinceEpoch}_${defaultTaskNames.indexOf(name)}',
+          title: name,
+          createdAt: now,
+        );
+      }).toList();
+      
+      await saveAllTasks(defaultTasks);
+    }
+  }
+
   // Helper to get date key in format YYYY-MM-DD
   static String _getDateKey(DateTime date) {
     return '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';

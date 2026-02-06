@@ -185,5 +185,41 @@
         "type": "String"
       }
     }
+  },
+  "defaultTaskExercise": "Exercise",
+  "@defaultTaskExercise": {
+    "description": "Default task: Exercise"
+  },
+  "defaultTaskStudy": "Study",
+  "@defaultTaskStudy": {
+    "description": "Default task: Study"
+  },
+  "defaultTaskMeditation": "Meditation",
+  "@defaultTaskMeditation": {
+    "description": "Default task: Meditation"
+  },
+  "defaultTaskHousework": "Housework",
+  "@defaultTaskHousework": {
+    "description": "Default task: Housework"
+  },
+  "chooseColorTheme": "Choose Color Theme",
+  "@chooseColorTheme": {
+    "description": "Color theme picker dialog title"
+  },
+  "close": "Close",
+  "@close": {
+    "description": "Close button"
+  },
+  "congratulations": "🎉 Congratulations! 🎉",
+  "@congratulations": {
+    "description": "Celebration dialog title"
+  },
+  "allTasksCompletedToday": "All tasks completed for today!",
+  "@allTasksCompletedToday": {
+    "description": "Message when all tasks are completed"
+  },
+  "keepUpGreatWork": "Keep up the great work! 💪",
+  "@keepUpGreatWork": {
+    "description": "Encouragement message"
   }
 }

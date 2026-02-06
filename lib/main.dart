@@ -5,6 +5,7 @@ import 'l10n/app_localizations.dart';
 import 'models/task.dart';
 import 'services/storage_service.dart';
 import 'services/date_service.dart';
+import 'services/theme_service.dart';
 import 'widgets/calendar_widget.dart';
 import 'widgets/task_list_widget.dart';
 import 'widgets/add_task_dialog.dart';
@@ -12,14 +13,36 @@ import 'widgets/statistics_dialog.dart';
 import 'widgets/history_dialog.dart';
 import 'widgets/debug_date_controls.dart';
 import 'widgets/celebration_dialog.dart';
+import 'widgets/color_theme_picker.dart';
 import 'constants/app_colors.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final ThemeService _themeService = ThemeService();
+
+  @override
+  void initState() {
+    super.initState();
+    _themeService.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    _themeService.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,11 +64,11 @@ class MyApp extends StatelessWidget {
         Locale('th', ''), // Thai
       ],
       theme: ThemeData(
-        // iOS color scheme
-        primaryColor: AppColors.blue,
+        // iOS color scheme with dynamic primary color
+        primaryColor: _themeService.primaryColor,
         scaffoldBackgroundColor: AppColors.background,
-        colorScheme: const ColorScheme.light(
-          primary: AppColors.blue,
+        colorScheme: ColorScheme.light(
+          primary: _themeService.primaryColor,
           secondary: AppColors.green,
           surface: AppColors.white,
           background: AppColors.background,
@@ -80,7 +103,7 @@ class MyApp extends StatelessWidget {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.blue,
+            backgroundColor: _themeService.primaryColor,
             foregroundColor: AppColors.white,
             elevation: 0,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -108,14 +131,16 @@ class MyApp extends StatelessWidget {
           space: 0,
         ),
       ),
-      home: const HomePage(),
+      home: HomePage(themeService: _themeService),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final ThemeService themeService;
+  
+  const HomePage({super.key, required this.themeService});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -131,7 +156,22 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _loadData();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _initializeDefaultTasks();
+      _loadData();
+    });
+  }
+
+  Future<void> _initializeDefaultTasks() async {
+    if (!mounted) return;
+    final localizations = AppLocalizations.of(context)!;
+    final defaultTaskNames = [
+      localizations.defaultTaskExercise,
+      localizations.defaultTaskStudy,
+      localizations.defaultTaskMeditation,
+      localizations.defaultTaskHousework,
+    ];
+    await StorageService.initializeDefaultTasks(defaultTaskNames);
   }
 
   Future<void> _loadData() async {
@@ -343,20 +383,42 @@ class _HomePageState extends State<HomePage> {
     final now = DateService.now;
     final currentMonth = DateTime(now.year, now.month);
 
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.appTitle),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        foregroundColor: theme.appBarTheme.foregroundColor,
         elevation: 0,
         actions: [
           IconButton(
-            icon: const Icon(Icons.history, color: AppColors.blue),
+            icon: Icon(
+              Icons.palette,
+              color: widget.themeService.primaryColor,
+            ),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => ColorThemePicker(
+                  themeService: widget.themeService,
+                ),
+              );
+            },
+            tooltip: 'Color Theme',
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.history,
+              color: widget.themeService.primaryColor,
+            ),
             onPressed: _showHistory,
             tooltip: AppLocalizations.of(context)!.viewHistory,
           ),
           IconButton(
-            icon: const Icon(Icons.bar_chart, color: AppColors.blue),
+            icon: Icon(
+              Icons.bar_chart,
+              color: widget.themeService.primaryColor,
+            ),
             onPressed: _showStatistics,
             tooltip: AppLocalizations.of(context)!.statisticsTooltip,
           ),
@@ -382,7 +444,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 Container(
                   height: 0.5,
-                  color: AppColors.divider,
+                  color: theme.dividerTheme.color,
                 ),
                   Expanded(
                     flex: 3,
@@ -401,7 +463,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: _addTask,
         tooltip: AppLocalizations.of(context)!.addTask,
-        backgroundColor: AppColors.blue,
+        backgroundColor: widget.themeService.primaryColor,
         child: const Icon(Icons.add, color: AppColors.white),
       ),
     );

@@ -185,5 +185,41 @@
         "type": "String"
       }
     }
+  },
+  "defaultTaskExercise": "運動",
+  "@defaultTaskExercise": {
+    "description": "デフォルトタスク：運動"
+  },
+  "defaultTaskStudy": "勉強",
+  "@defaultTaskStudy": {
+    "description": "デフォルトタスク：勉強"
+  },
+  "defaultTaskMeditation": "瞑想",
+  "@defaultTaskMeditation": {
+    "description": "デフォルトタスク：瞑想"
+  },
+  "defaultTaskHousework": "家事",
+  "@defaultTaskHousework": {
+    "description": "デフォルトタスク：家事"
+  },
+  "chooseColorTheme": "カラーテーマを選択",
+  "@chooseColorTheme": {
+    "description": "カラーテーマ選択ダイアログのタイトル"
+  },
+  "close": "閉じる",
+  "@close": {
+    "description": "閉じるボタン"
+  },
+  "congratulations": "🎉 おめでとうございます！🎉",
+  "@congratulations": {
+    "description": "お祝いダイアログのタイトル"
+  },
+  "allTasksCompletedToday": "今日のすべてのタスクが完了しました！",
+  "@allTasksCompletedToday": {
+    "description": "すべてのタスクが完了したときのメッセージ"
+  },
+  "keepUpGreatWork": "この調子で頑張ってください！💪",
+  "@keepUpGreatWork": {
+    "description": "励ましのメッセージ"
   }
 }

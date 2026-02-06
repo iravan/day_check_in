@@ -140,9 +140,9 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                 ),
                 // Edit button
                 IconButton(
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.edit,
-                    color: AppColors.blue,
+                    color: Theme.of(context).colorScheme.primary,
                     size: 22,
                   ),
                   onPressed: _showEditMenu,
@@ -153,7 +153,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                     decoration: BoxDecoration(
                       color: widget.tasks.every((t) => t.isCompleted)
-                          ? AppColors.green
+                          ? Theme.of(context).colorScheme.primary
                           : AppColors.gray,
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -261,11 +261,11 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: task.isCompleted
-                        ? AppColors.green
+                        ? Theme.of(context).colorScheme.primary
                         : Colors.transparent,
                     border: Border.all(
                       color: task.isCompleted
-                          ? AppColors.green
+                          ? Theme.of(context).colorScheme.primary
                           : AppColors.gray,
                       width: task.isCompleted ? 0 : 3,
                     ),
@@ -316,7 +316,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
                   color: task.isCompleted
-                      ? AppColors.green
+                      ? Theme.of(context).colorScheme.primary
                       : AppColors.gray,
                 ),
               ),
@@ -333,7 +333,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: i == index
-                          ? AppColors.blue
+                          ? Theme.of(context).colorScheme.primary
                           : AppColors.lightGray,
                     ),
                   ),

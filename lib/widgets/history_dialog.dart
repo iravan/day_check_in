@@ -36,13 +36,14 @@ class _HistoryDialogState extends State<HistoryDialog> {
       }
     }
 
-    // Sort months descending
+    // Sort months ascending (oldest first)
     final sortedKeys = grouped.keys.toList()
-      ..sort((a, b) => b.compareTo(a));
+      ..sort((a, b) => a.compareTo(b));
 
     final sortedMap = <String, List<String>>{};
     for (final key in sortedKeys) {
-      sortedMap[key] = grouped[key]!..sort((a, b) => b.compareTo(a));
+      // Sort days within each month ascending (oldest first)
+      sortedMap[key] = grouped[key]!..sort((a, b) => a.compareTo(b));
     }
 
     setState(() {
@@ -137,8 +138,8 @@ class _HistoryDialogState extends State<HistoryDialog> {
                           leading: Container(
                             width: 32,
                             height: 32,
-                            decoration: const BoxDecoration(
-                              color: AppColors.green,
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.primary,
                               shape: BoxShape.circle,
                             ),
                             child: const Icon(
@@ -176,16 +177,16 @@ class _HistoryDialogState extends State<HistoryDialog> {
                                 return Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                                   decoration: BoxDecoration(
-                                    color: AppColors.green.withOpacity(0.1),
+                                    color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      const Icon(
+                                      Icon(
                                         Icons.check_circle,
                                         size: 16,
-                                        color: AppColors.green,
+                                        color: Theme.of(context).colorScheme.primary,
                                       ),
                                       const SizedBox(width: 6),
                                       Text(

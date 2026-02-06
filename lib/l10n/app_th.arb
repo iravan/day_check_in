@@ -185,5 +185,41 @@
         "type": "String"
       }
     }
+  },
+  "defaultTaskExercise": "ออกกำลังกาย",
+  "@defaultTaskExercise": {
+    "description": "งานเริ่มต้น：ออกกำลังกาย"
+  },
+  "defaultTaskStudy": "เรียน",
+  "@defaultTaskStudy": {
+    "description": "งานเริ่มต้น：เรียน"
+  },
+  "defaultTaskMeditation": "นั่งสมาธิ",
+  "@defaultTaskMeditation": {
+    "description": "งานเริ่มต้น：นั่งสมาธิ"
+  },
+  "defaultTaskHousework": "งานบ้าน",
+  "@defaultTaskHousework": {
+    "description": "งานเริ่มต้น：งานบ้าน"
+  },
+  "chooseColorTheme": "เลือกธีมสี",
+  "@chooseColorTheme": {
+    "description": "หัวข้อกล่องโต้ตอบเลือกธีมสี"
+  },
+  "close": "ปิด",
+  "@close": {
+    "description": "ปุ่มปิด"
+  },
+  "congratulations": "🎉 ยินดีด้วย! 🎉",
+  "@congratulations": {
+    "description": "หัวข้อกล่องโต้ตอบแสดงความยินดี"
+  },
+  "allTasksCompletedToday": "งานทั้งหมดสำหรับวันนี้เสร็จสมบูรณ์แล้ว!",
+  "@allTasksCompletedToday": {
+    "description": "ข้อความเมื่องานทั้งหมดเสร็จสมบูรณ์"
+  },
+  "keepUpGreatWork": "ทำต่อไปให้ดี! 💪",
+  "@keepUpGreatWork": {
+    "description": "ข้อความให้กำลังใจ"
   }
 }

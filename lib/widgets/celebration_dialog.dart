@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import '../l10n/app_localizations.dart';
+import '../constants/app_colors.dart';
 
 class CelebrationDialog extends StatefulWidget {
   const CelebrationDialog({super.key});
@@ -129,11 +131,11 @@ class _CelebrationDialogState extends State<CelebrationDialog>
               child: Container(
                 padding: const EdgeInsets.all(32),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.white,
                   borderRadius: BorderRadius.circular(24),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.green.withOpacity(0.3),
+                      color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
                       blurRadius: 20,
                       spreadRadius: 5,
                     ),
@@ -144,37 +146,37 @@ class _CelebrationDialogState extends State<CelebrationDialog>
                   children: [
                     ScaleTransition(
                       scale: _pulseAnimation,
-                      child: const Icon(
+                      child: Icon(
                         Icons.celebration,
                         size: 80,
-                        color: Colors.green,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                     const SizedBox(height: 24),
-                    const Text(
-                      '🎉 Congratulations! 🎉',
+                    Text(
+                      AppLocalizations.of(context)!.congratulations,
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
-                        color: Colors.green,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 16),
-                    const Text(
-                      'All tasks completed for today!',
-                      style: TextStyle(
+                    Text(
+                      AppLocalizations.of(context)!.allTasksCompletedToday,
+                      style: const TextStyle(
                         fontSize: 18,
-                        color: Colors.grey,
+                        color: AppColors.gray,
                       ),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Keep up the great work! 💪',
+                      AppLocalizations.of(context)!.keepUpGreatWork,
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.grey.shade600,
+                        color: AppColors.gray,
                         fontStyle: FontStyle.italic,
                       ),
                       textAlign: TextAlign.center,

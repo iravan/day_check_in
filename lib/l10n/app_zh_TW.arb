@@ -185,5 +185,41 @@
         "type": "String"
       }
     }
+  },
+  "defaultTaskExercise": "運動",
+  "@defaultTaskExercise": {
+    "description": "預設任務：運動"
+  },
+  "defaultTaskStudy": "學習",
+  "@defaultTaskStudy": {
+    "description": "預設任務：學習"
+  },
+  "defaultTaskMeditation": "冥想",
+  "@defaultTaskMeditation": {
+    "description": "預設任務：冥想"
+  },
+  "defaultTaskHousework": "家務",
+  "@defaultTaskHousework": {
+    "description": "預設任務：家務"
+  },
+  "chooseColorTheme": "選擇顏色主題",
+  "@chooseColorTheme": {
+    "description": "顏色主題選擇器對話框標題"
+  },
+  "close": "關閉",
+  "@close": {
+    "description": "關閉按鈕"
+  },
+  "congratulations": "🎉 恭喜！🎉",
+  "@congratulations": {
+    "description": "慶祝對話框標題"
+  },
+  "allTasksCompletedToday": "今天的所有任務都已完成！",
+  "@allTasksCompletedToday": {
+    "description": "所有任務完成時的訊息"
+  },
+  "keepUpGreatWork": "繼續加油！💪",
+  "@keepUpGreatWork": {
+    "description": "鼓勵訊息"
   }
 }

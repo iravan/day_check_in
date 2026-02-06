@@ -144,4 +144,31 @@ class AppLocalizationsEn extends AppLocalizations {
   String dayNumber(String day) {
     return 'Day $day';
   }
+
+  @override
+  String get defaultTaskExercise => 'Exercise';
+
+  @override
+  String get defaultTaskStudy => 'Study';
+
+  @override
+  String get defaultTaskMeditation => 'Meditation';
+
+  @override
+  String get defaultTaskHousework => 'Housework';
+
+  @override
+  String get chooseColorTheme => 'Choose Color Theme';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get congratulations => '🎉 Congratulations! 🎉';
+
+  @override
+  String get allTasksCompletedToday => 'All tasks completed for today!';
+
+  @override
+  String get keepUpGreatWork => 'Keep up the great work! 💪';
 }

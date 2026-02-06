@@ -328,6 +328,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Day {day}'**
   String dayNumber(String day);
+
+  /// Default task: Exercise
+  ///
+  /// In en, this message translates to:
+  /// **'Exercise'**
+  String get defaultTaskExercise;
+
+  /// Default task: Study
+  ///
+  /// In en, this message translates to:
+  /// **'Study'**
+  String get defaultTaskStudy;
+
+  /// Default task: Meditation
+  ///
+  /// In en, this message translates to:
+  /// **'Meditation'**
+  String get defaultTaskMeditation;
+
+  /// Default task: Housework
+  ///
+  /// In en, this message translates to:
+  /// **'Housework'**
+  String get defaultTaskHousework;
+
+  /// Color theme picker dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Color Theme'**
+  String get chooseColorTheme;
+
+  /// Close button
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// Celebration dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'🎉 Congratulations! 🎉'**
+  String get congratulations;
+
+  /// Message when all tasks are completed
+  ///
+  /// In en, this message translates to:
+  /// **'All tasks completed for today!'**
+  String get allTasksCompletedToday;
+
+  /// Encouragement message
+  ///
+  /// In en, this message translates to:
+  /// **'Keep up the great work! 💪'**
+  String get keepUpGreatWork;
 }
 
 class _AppLocalizationsDelegate

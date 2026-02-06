@@ -145,4 +145,32 @@ class AppLocalizationsTh extends AppLocalizations {
   String dayNumber(String day) {
     return 'วันที่ $day';
   }
+
+  @override
+  String get defaultTaskExercise => 'ออกกำลังกาย';
+
+  @override
+  String get defaultTaskStudy => 'เรียน';
+
+  @override
+  String get defaultTaskMeditation => 'นั่งสมาธิ';
+
+  @override
+  String get defaultTaskHousework => 'งานบ้าน';
+
+  @override
+  String get chooseColorTheme => 'เลือกธีมสี';
+
+  @override
+  String get close => 'ปิด';
+
+  @override
+  String get congratulations => '🎉 ยินดีด้วย! 🎉';
+
+  @override
+  String get allTasksCompletedToday =>
+      'งานทั้งหมดสำหรับวันนี้เสร็จสมบูรณ์แล้ว!';
+
+  @override
+  String get keepUpGreatWork => 'ทำต่อไปให้ดี! 💪';
 }
