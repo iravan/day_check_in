@@ -77,7 +77,7 @@ class _EditTaskDialogState extends State<EditTaskDialog> {
             AppLocalizations.of(context)!.cancel,
             style: TextStyle(
               fontSize: 17,
-              color: AppColors.blue,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
         ),
@@ -87,10 +87,10 @@ class _EditTaskDialogState extends State<EditTaskDialog> {
             widget.task == null 
                 ? AppLocalizations.of(context)!.add 
                 : AppLocalizations.of(context)!.save,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 17,
               fontWeight: FontWeight.w600,
-              color: AppColors.blue,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
         ),

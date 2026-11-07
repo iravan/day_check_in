@@ -101,7 +101,7 @@ class _StatisticsDialogState extends State<StatisticsDialog> {
             style: TextStyle(
               fontSize: 17,
               fontWeight: FontWeight.w600,
-              color: AppColors.blue,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
         ),

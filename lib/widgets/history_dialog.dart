@@ -81,7 +81,7 @@ class _HistoryDialogState extends State<HistoryDialog> {
                   ),
                   const Spacer(),
                   IconButton(
-                    icon: const Icon(Icons.close, color: AppColors.blue),
+                    icon: Icon(Icons.close, color: Theme.of(context).colorScheme.primary),
                     onPressed: () => Navigator.of(context).pop(),
                     padding: EdgeInsets.zero,
                   ),

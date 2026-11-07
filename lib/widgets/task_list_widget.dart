@@ -226,7 +226,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                 itemBuilder: (context, index) {
                   final task = widget.tasks[index];
                   return Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 88),
                     child: _buildTaskCard(task, index),
                   );
                 },
@@ -243,7 +243,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
       child: Container(
         width: double.infinity,
         height: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(20),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart';
 import 'l10n/app_localizations.dart';
 import 'models/task.dart';
 import 'services/storage_service.dart';
@@ -225,11 +226,15 @@ class _HomePageState extends State<HomePage> {
     if (!isToday) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Row(
+          content: Row(
             children: [
-              Icon(Icons.info_outline, color: Colors.white),
-              SizedBox(width: 12),
-              Text('You can only add tasks for today!'),
+              const Icon(Icons.info_outline, color: Colors.white),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  AppLocalizations.of(context)!.youCanOnlyAddTasksForToday,
+                ),
+              ),
             ],
           ),
           backgroundColor: Colors.orange.shade600,
@@ -339,11 +344,15 @@ class _HomePageState extends State<HomePage> {
     if (!isToday) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Row(
+          content: Row(
             children: [
-              Icon(Icons.info_outline, color: Colors.white),
-              SizedBox(width: 12),
-              Text('You can only add tasks for today!'),
+              const Icon(Icons.info_outline, color: Colors.white),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  AppLocalizations.of(context)!.youCanOnlyAddTasksForToday,
+                ),
+              ),
             ],
           ),
           backgroundColor: Colors.orange.shade600,
@@ -397,12 +406,29 @@ class _HomePageState extends State<HomePage> {
     final currentMonth = DateTime(now.year, now.month);
 
     final theme = Theme.of(context);
+    // Get localized month name
+    final locale = Localizations.localeOf(context);
+    final monthFormat = DateFormat('MMMM', locale.toString());
+    final monthName = monthFormat.format(currentMonth);
+    final year = currentMonth.year.toString();
+    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: theme.appBarTheme.backgroundColor,
         foregroundColor: theme.appBarTheme.foregroundColor,
         elevation: 0,
+        centerTitle: false,
+        titleSpacing: 16,
         automaticallyImplyLeading: false,
+        title: Text(
+          '$monthName $year',
+          style: TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            color: theme.appBarTheme.foregroundColor ?? AppColors.black,
+            letterSpacing: 0.37,
+          ),
+        ),
         actions: [
           IconButton(
             icon: Icon(
@@ -417,7 +443,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               );
             },
-            tooltip: 'Color Theme',
+            tooltip: AppLocalizations.of(context)!.chooseColorTheme,
           ),
           IconButton(
             icon: Icon(
@@ -438,6 +464,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: SafeArea(
+        top: false,
         child: _isLoading
             ? const Center(child: CircularProgressIndicator())
             : Column(

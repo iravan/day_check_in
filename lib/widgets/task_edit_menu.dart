@@ -30,7 +30,7 @@ class TaskEditMenu extends StatelessWidget {
         children: [
           if (task != null) ...[
             ListTile(
-              leading: const Icon(Icons.edit, color: AppColors.blue),
+              leading: Icon(Icons.edit, color: Theme.of(context).colorScheme.primary),
               title: Text(
                 AppLocalizations.of(context)!.edit,
                 style: TextStyle(
@@ -60,7 +60,7 @@ class TaskEditMenu extends StatelessWidget {
             ),
           ] else if (onCreate != null) ...[
             ListTile(
-              leading: const Icon(Icons.add, color: AppColors.blue),
+              leading: Icon(Icons.add, color: Theme.of(context).colorScheme.primary),
               title: Text(
                 AppLocalizations.of(context)!.createNewTask,
                 style: TextStyle(

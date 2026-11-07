@@ -64,7 +64,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
             AppLocalizations.of(context)!.cancel,
             style: TextStyle(
               fontSize: 17,
-              color: AppColors.blue,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
         ),
@@ -75,7 +75,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
             style: TextStyle(
               fontSize: 17,
               fontWeight: FontWeight.w600,
-              color: AppColors.blue,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
         ),

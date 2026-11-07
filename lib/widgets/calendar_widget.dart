@@ -39,12 +39,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         firstDayOfMonth.weekday % 7; // Sunday (7) becomes 0, Monday (1) stays 1
     final daysInMonth = lastDayOfMonth.day;
 
-    // Get localized month name - format as "Month Year"
-    final locale = Localizations.localeOf(context);
-    final monthFormat = DateFormat('MMMM', locale.toString());
-    final monthName = monthFormat.format(currentMonth);
-    final year = currentMonth.year.toString();
-
     // Get localized day labels starting from Sunday
     final dayLabels = _getLocalizedDayLabels(context);
 
@@ -53,24 +47,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
       padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
       child: Column(
         children: [
-          // iOS Calendar style header
-          Container(
-            padding: const EdgeInsets.only(bottom: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '$monthName $year',
-                  style: const TextStyle(
-                    fontSize: 34,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.black,
-                    letterSpacing: 0.37,
-                  ),
-                ),
-              ],
-            ),
-          ),
           // Day labels - iOS style
           Container(
             padding: const EdgeInsets.only(bottom: 12),
