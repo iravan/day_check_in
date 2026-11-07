@@ -21,4 +21,5 @@ Act as a professional UI/UX designer: audit the app against an iOS Calendar–in
 - [x] UI/UX review
 - [x] Apply fixes
 - [x] Review changes
-- [ ] Commit + push
+- [x] Commit (noreply author)
+- [ ] Push to GitHub (pending auth)
