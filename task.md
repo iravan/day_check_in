@@ -22,4 +22,4 @@ Act as a professional UI/UX designer: audit the app against an iOS Calendar–in
 - [x] Apply fixes
 - [x] Review changes
 - [x] Commit (noreply author)
-- [ ] Push to GitHub (pending auth)
+- [x] Push to GitHub (`https://github.com/iravan/day_check_in`)
